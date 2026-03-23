@@ -231,7 +231,7 @@ const handleFindLeads = async () => {
         )}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Recent Leads */}
         <div className="lg:col-span-2 card p-6">
           <div className="flex items-center justify-between mb-5">
@@ -267,7 +267,7 @@ const handleFindLeads = async () => {
             <div className="space-y-2">
               {leads.map((lead) => (
                 <Link
-                  key={lead.id}
+                  key={lead._id}
                   to={`/leads/${lead._id}`}
                   className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group"
                 >

@@ -27,15 +27,19 @@ export default function LeadAnalysis() {
     setLoading(true);
     try {
       const res = await api.post(`/leads/${id}/analyze`);
-      setAnalysis(res.data);
-      setEditedProblem(res.data.problemDescription);
+      setAnalysis({
+        problemDescription: res.data.message.problem,
+        reasoning: res.data.message.opportunity,
+        opportunityScore: res.data.message.score.toLowerCase(),
+      });
+      setEditedProblem(res.data.message.problem);
     } finally {
       setLoading(false);
     }
   };
 
   const acceptAnalysis = async () => {
-    await api.put(`/leads/${id}`, {
+    await api.patch(`/leads/${id}`, {
       problemDescription: editedProblem || analysis?.problemDescription,
       opportunityScore: analysis?.opportunityScore,
       analysisAccepted: true,

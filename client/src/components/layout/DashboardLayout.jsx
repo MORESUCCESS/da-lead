@@ -43,7 +43,7 @@ export default function DashboardLayout({ children }) {
           <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow">
             <Target size={16} className="text-white" strokeWidth={2.5} />
           </div>
-          <span className="font-bold text-xl text-gray-900">FynLead</span>
+          <span className="font-bold text-xl text-gray-900">Da-Lead</span>
         </div>
 
         {/* Nav */}
