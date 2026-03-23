@@ -16,7 +16,7 @@ yarn-error.log*
 # ==========================
 # Environment variables
 # ==========================
-.env            # server env
+.env            
 **/.env         # any nested env
 .env.local      # React/Next local env
 .env.development

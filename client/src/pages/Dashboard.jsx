@@ -130,7 +130,7 @@ const handleFindLeads = async () => {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-black text-gray-900">
-            Hello, {user?.name} 👋
+            Hello, {user?.name?.split(' ')[0]} 👋
           </h1>
           <p className="text-gray-500 mt-1 lg:text-lg text-sm">
             Here's what's happening with your outreach.

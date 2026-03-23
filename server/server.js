@@ -33,6 +33,9 @@ app.use('/api/dashboard', dashboardRouter);
 // finding lead suggestions
 app.use('/api/lead-finder', leadSuggestionRouter);
 
+// message router api endpoints
+app.use('/api', require("./routes/messageRoutes.js"));
+
 
 
 
