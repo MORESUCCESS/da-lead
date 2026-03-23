@@ -82,7 +82,7 @@ export default function Landing() {
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm">
               <Target size={16} className="text-white" strokeWidth={2.5} />
             </div>
-            <span className="font-bold lg:text-xl text-gray-900">FynLead</span>
+            <span className="font-bold lg:text-xl text-gray-900">Da-Lead</span>
           </div>
           <div className="lg:flex hidden md:gap-6">
             <a
@@ -368,7 +368,7 @@ export default function Landing() {
               <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <Target size={14} className="text-white" />
               </div>
-              <span className="font-bold text-white">FynLead</span>
+              <span className="font-bold text-white">Da-Lead</span>
               <span className="text-gray-500 text-sm ml-2">
                 · Find leads, send smarter ptiches, and close deals.
               </span>
