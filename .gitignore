@@ -1,0 +1,49 @@
+# ==========================
+# Node modules (client + server)
+# ==========================
+node_modules/
+**/node_modules/
+
+# ==========================
+# Logs
+# ==========================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================
+# Environment variables
+# ==========================
+.env            # server env
+**/.env         # any nested env
+.env.local      # React/Next local env
+.env.development
+.env.production
+
+# ==========================
+# Build / Output folders
+# ==========================
+# Server
+dist/
+# Client
+build/
+.next/
+out/
+
+# ==========================
+# OS / Editor files
+# ==========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.bak
+*.swp
+
+# ==========================
+# Misc
+# ==========================
+coverage/
+*.zip
