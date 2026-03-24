@@ -1,4 +1,5 @@
 const Lead = require('../models/leadModel.js');
+const messageModel = require('../models/messageModel.js');
 
 // add leads
 const createLead = async (req, res) => {
@@ -92,6 +93,9 @@ const deleteLead = async (req, res) => {
     if (!lead) {
       return res.status(404).json({ success: false, message: 'Lead not found' });
     }
+
+    // Also delete all messages attached to the lead
+    await messageModel.deleteMany({lead: leadId});
 
     await lead.deleteOne();
 

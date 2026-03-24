@@ -30,4 +30,23 @@ const saveMessage = async (req, res) => {
   }
 };
 
-module.exports = { saveMessage };
+// fetch messages
+const fetchMessages = async(req, res)=>{
+  
+  try {
+    const leadMessages = await Message.find({ lead: req.params.id }).sort({ createdAt: -1 });
+
+    if(leadMessages.length === 0)
+    {
+      return res.status(404).json({success: false, message: "You don't have any saved messages yet"})
+    }
+
+    return res.status(200).json({success: true, leadMessages});
+  } catch (error) {
+      return res.status(500).json({success: false, message: error.message});
+  }
+
+
+}
+
+module.exports = { saveMessage, fetchMessages };

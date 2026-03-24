@@ -385,7 +385,7 @@ export default function Landing() {
               </a>
             </div>
             <p className="text-gray-600 text-sm">
-              © 2026 FynLead. All rights reserved.
+              © 2026 Da-Lead. All rights reserved.
             </p>
           </div>
         </div>
