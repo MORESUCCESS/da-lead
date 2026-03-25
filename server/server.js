@@ -7,6 +7,7 @@ const authRouter = require('./routes/authRoutes.js');
 const leadRouter = require('./routes/leadRoutes.js');
 const dashboardRouter = require('./routes/dashboardRoutes.js');
 const leadSuggestionRouter = require('./routes/leadFinderRoutes.js');
+const userRouter = require('./routes/userRoutes.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000
@@ -35,6 +36,9 @@ app.use('/api/lead-finder', leadSuggestionRouter);
 
 // message router api endpoints
 app.use('/api', require("./routes/messageRoutes.js"));
+
+// user details
+app.use('/api/users', userRouter);
 
 
 

@@ -1,0 +1,64 @@
+const userModel = require("../models/userModel");
+
+// fetch user details and display it on settings page
+const UserDetails = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select("-password");
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User Details not found" });
+    }
+
+    return res.status(200).json({ success: true, user: user });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// update user profile
+const UpdateUser = async (req, res) => {
+  const { name, freelanceCategory, bio } = req.body;
+
+  if (!name && !freelanceCategory && !bio) {
+    return res.status(400).json({
+      success: false,
+      message: "No data to update",
+    });
+  }
+
+  try {
+    const updatedUser = await userModel.findByIdAndUpdate(
+      req.user.id,
+      {
+        ...(name && { name }),
+        ...(freelanceCategory && { freelanceCategory }),
+        ...(bio && { bio }),
+      },
+      {
+        new: true, // return updated user
+        runValidators: true, // enforce schema rules
+      }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user: updatedUser,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { UserDetails, UpdateUser };

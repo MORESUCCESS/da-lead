@@ -20,10 +20,10 @@ export default function Settings() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    api.get('/profile')
+    api.get('/users')
       .then((res) => {
-        setProfile(res.data);
-        setForm({ name: res.data.name || '', bio: res.data.bio || '', freelanceCategory: res.data.freelanceCategory || '' });
+        setProfile(res.data.user);
+        setForm({ name: res.data.user.name || '', bio: res.data.user.bio || '', freelanceCategory: res.data.user.freelanceCategory || '' });
       })
       .finally(() => setLoading(false));
   }, []);
@@ -34,8 +34,8 @@ export default function Settings() {
     setSuccess(false);
     setError('');
     try {
-      const res = await api.put('/profile', form);
-      setProfile(res.data);
+      const res = await api.put('/users', form);
+      setProfile(res.data.user);
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
     } catch {
@@ -131,7 +131,7 @@ export default function Settings() {
         </form>
 
         {/* Right: Plan + Prefs */}
-        <div className="space-y-5">
+        <div className="space-y-5 hidden">
           {/* Subscription */}
           <div className="card p-5">
             <div className="flex items-center gap-2 mb-4">
@@ -150,7 +150,7 @@ export default function Settings() {
             </ul>
             {plan === 'free' && (
               <button className="btn-accent w-full text-sm flex items-center justify-center gap-2">
-                <Crown size={15} /> Upgrade to Pro
+                <Crown size={15} /> Upgrate to pro(coming soon!)
               </button>
             )}
           </div>
