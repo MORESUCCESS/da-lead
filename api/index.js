@@ -1,3 +1,3 @@
-import app from '../server/server.js'; 
+const app = '../server/server.js'; 
 
 module.exports = app;
