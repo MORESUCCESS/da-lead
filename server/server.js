@@ -41,6 +41,17 @@ app.use('/api/users', userRouter);
 
 
 
+// Serve Vite build for frontend routes (This is when I'm done with MVP)
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "../client/dist")));
+
+// Only handle non-API routes
+app.get(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+});
+
+
 
 
 
