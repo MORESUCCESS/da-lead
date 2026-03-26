@@ -16,10 +16,6 @@ app.use(cors({origin: 'http://localhost:5173', credentials: true}));
 app.use(express.json());
 app.use(cookie_parser());
 
-// API EndPoints
-app.get('/', (req, res)=>{
-    res.status(200).json({message: "Server working perfectly fine"})
-});
 
 // authrouter api endpoints
 app.use('/api/auth', authRouter);
