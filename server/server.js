@@ -9,7 +9,7 @@ const dashboardRouter = require('./routes/dashboardRoutes.js');
 const leadSuggestionRouter = require('./routes/leadFinderRoutes.js');
 const userRouter = require('./routes/userRoutes.js');
 const app = express();
-const PORT = process.env.PORT || 3000
+// const PORT = process.env.PORT || 3000
 connectToDb();
 
 app.use(cors({origin: 'http://localhost:5173', credentials: true}));
@@ -51,6 +51,4 @@ app.get(/^\/(?!api).*/, (req, res) => {
 
 
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on port ${PORT}`)
-})
+module.exports = app;
