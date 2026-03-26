@@ -1,38 +1,43 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { Target, Eye, EyeOff, AlertCircle, CheckCircle } from 'lucide-react';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { Target, Eye, EyeOff, AlertCircle, CheckCircle } from "lucide-react";
+import GoogleButton from "./google";
 
 const perks = [
-  'AI-powered opportunity scoring',
-  'Personalized pitch generator',
-  'Visual lead tracking pipeline',
-  'Follow-up reminders',
+  "AI-powered opportunity scoring",
+  "Personalized pitch generator",
+  "Visual lead tracking pipeline",
+  "Follow-up reminders",
 ];
 
 export default function Signup() {
   const { register } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [showPass, setShowPass] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     if (form.password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError("Password must be at least 6 characters");
       return;
     }
     setLoading(true);
     try {
       await register(form.name, form.email, form.password);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong. Please try again.');
+      setError(
+        err.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
     } finally {
       setLoading(false);
     }
@@ -48,8 +53,12 @@ export default function Signup() {
           </div>
           <span className="font-bold text-2xl text-white">Da-Lead</span>
         </div>
-        <h2 className="text-4xl font-black text-white mb-4 leading-tight">Start your journey</h2>
-        <p className="text-primary-100 mb-10">Join thousands of freelancers scaling their outreach with AI.</p>
+        <h2 className="text-4xl font-black text-white mb-4 leading-tight">
+          Start your journey
+        </h2>
+        <p className="text-primary-100 mb-10">
+          Join thousands of freelancers scaling their outreach with AI.
+        </p>
         <ul className="space-y-3">
           {perks.map((p) => (
             <li key={p} className="flex items-center gap-3 text-primary-100">
@@ -70,8 +79,12 @@ export default function Signup() {
             <span className="font-bold text-xl text-[#e0e0e0]">Da-Lead</span>
           </Link>
 
-          <h1 className="text-3xl font-black text-[#e0e0e0] mb-2">Create an account</h1>
-          <p className="text-[#a0a0a0] mb-8">Start turning leads into clients today</p>
+          <h1 className="text-3xl font-black text-[#e0e0e0] mb-2">
+            Create an account
+          </h1>
+          <p className="text-[#a0a0a0] mb-8">
+            Start turning leads into clients today
+          </p>
 
           {error && (
             <div className="flex items-center gap-2.5 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-3 rounded-xl mb-6">
@@ -80,9 +93,11 @@ export default function Signup() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Full Name</label>
+              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">
+                Full Name
+              </label>
               <input
                 type="text"
                 name="name"
@@ -94,7 +109,9 @@ export default function Signup() {
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Email address</label>
+              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">
+                Email address
+              </label>
               <input
                 type="email"
                 name="email"
@@ -106,10 +123,12 @@ export default function Signup() {
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Password</label>
+              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">
+                Password
+              </label>
               <div className="relative">
                 <input
-                  type={showPass ? 'text' : 'password'}
+                  type={showPass ? "text" : "password"}
                   name="password"
                   value={form.password}
                   onChange={handleChange}
@@ -126,22 +145,44 @@ export default function Signup() {
                 </button>
               </div>
             </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full">
-              {loading ? 'Creating account...' : 'Create Account'}
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-primary w-full"
+            >
+              {loading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
-          <p className="text-center text-sm text-gray-500 mt-6">
-            Already have an account?{' '}
-            <Link to="/login" className="text-primary font-semibold hover:underline">
+          {/* Seperator */}
+          <div className="flex items-center my-3">
+            <hr className="flex-grow border-gray-700" />
+            <span className="mx-3 text-gray-400 font-medium text-sm">OR</span>
+            <hr className="flex-grow border-gray-700" />
+          </div>
+
+          {/* Sign up with Google */}
+
+          <GoogleButton/>
+
+          <p className="text-center text-sm text-gray-500 mt-5">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="text-primary font-semibold hover:underline"
+            >
               Sign in
             </Link>
           </p>
-          <p className="text-center text-xs text-gray-400 mt-4">
-            By signing up, you agree to our{' '}
-            <a href="#" className="underline hover:text-gray-600">Terms of Service</a>
-            {' '}and{' '}
-            <a href="#" className="underline hover:text-gray-600">Privacy Policy</a>
+          <p className="text-center text-xs text-gray-400 mt-1">
+            By signing up, you agree to our{" "}
+            <a href="#" className="underline hover:text-gray-600">
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a href="#" className="underline hover:text-gray-600">
+              Privacy Policy
+            </a>
           </p>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Target, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import GoogleButton from './google';
 
 export default function Login() {
   const { login } = useAuth();
@@ -92,6 +93,16 @@ export default function Login() {
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
+
+          {/* Seperator */}
+          <div className="flex items-center my-3">
+            <hr className="flex-grow border-gray-700" />
+            <span className="mx-3 text-gray-400 font-medium text-sm">OR</span>
+            <hr className="flex-grow border-gray-700" />
+          </div>
+
+          {/* Sign up with google */}
+          <GoogleButton/>
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Don't have an account?{' '}
