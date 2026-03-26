@@ -107,7 +107,7 @@ export default function Landing() {
           <div className="flex items-center">
             <Link
               to="/signup"
-              className="lg:flex hidden btn-primary bg-[#7F5AF0] rounded-full text-sm !py-2.5 !px-5"
+              className="lg:flex hidden btn-primary bg-primary rounded-full text-sm !py-2.5 !px-5"
             >
               Get Started
             </Link>
@@ -146,7 +146,7 @@ export default function Landing() {
             <li>
               <Link
                 to="/signup"
-                className="btn-primary bg-[#7F5AF0] rounded-full text-sm !py-2.5 !px-5"
+                className="btn-primary bg-primary rounded-full text-sm !py-2.5 !px-5"
               >
                 Get Started
               </Link>
@@ -174,7 +174,7 @@ export default function Landing() {
                   Find leads, send
                   <br className="lg:flex hidden" />
                   smarter ptiches,{" "}
-                  <span className="text-[#7F5AF0]">and close</span>{" "}
+                  <span className="text-primary">and close</span>{" "}
                   <span className="text-accent">deals.</span>
                 </h1>
                 <p className="lg:text-lg text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
@@ -183,7 +183,7 @@ export default function Landing() {
                   pitches that actually convert.
                 </p>
                 <div className="flex w-full items-center justify-center">
-                  <Link to="/signup" className="btn-primary rounded-full text-center px-10 bg-[#7F5AF0]">
+                  <Link to="/signup" className="btn-primary rounded-full text-center px-10 bg-primary">
                     Start Now <ArrowRight size={16} className="inline ml-1" />
                   </Link>
                 </div>
@@ -312,9 +312,9 @@ export default function Landing() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-5 py-3.5 rounded-full bg-[#2A2A2A] border border-black/20 text-[#E0E0E0] placeholder-[#E0E0E0] focus:outline-none focus:ring-1 focus:ring-black/10"
+                className="flex-1 px-5 py-3.5 rounded-full bg-[#2A2A2A] border border-black/20 text-[#E0E0E0] placeholder-[#E0E0E0] focus:outline-none focus:ring-1 focus:ring-white/10 border-gray-800"
               />
-              <Link to="/signup" className="btn-primary bg-[#7F5AF0] rounded-full px-8 whitespace-nowrap">
+              <Link to="/signup" className="btn-primary bg-primary rounded-full px-8 whitespace-nowrap">
                 Get Started
               </Link>
             </div>

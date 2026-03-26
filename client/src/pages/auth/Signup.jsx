@@ -46,7 +46,7 @@ export default function Signup() {
           <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
             <Target size={18} className="text-white" />
           </div>
-          <span className="font-bold text-2xl text-white">FynLead</span>
+          <span className="font-bold text-2xl text-white">Da-Lead</span>
         </div>
         <h2 className="text-4xl font-black text-white mb-4 leading-tight">Start your journey</h2>
         <p className="text-primary-100 mb-10">Join thousands of freelancers scaling their outreach with AI.</p>
@@ -61,17 +61,17 @@ export default function Signup() {
       </div>
 
       {/* Right — form */}
-      <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-12 bg-white">
+      <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-12 bg-[#121212]">
         <div className="max-w-md w-full mx-auto">
           <Link to="/" className="flex items-center gap-2 mb-10 lg:hidden">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Target size={16} className="text-white" />
             </div>
-            <span className="font-bold text-xl text-gray-900">FynLead</span>
+            <span className="font-bold text-xl text-[#e0e0e0]">Da-Lead</span>
           </Link>
 
-          <h1 className="text-3xl font-black text-gray-900 mb-2">Create an account</h1>
-          <p className="text-gray-500 mb-8">Start turning leads into clients today</p>
+          <h1 className="text-3xl font-black text-[#e0e0e0] mb-2">Create an account</h1>
+          <p className="text-[#a0a0a0] mb-8">Start turning leads into clients today</p>
 
           {error && (
             <div className="flex items-center gap-2.5 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-3 rounded-xl mb-6">
@@ -82,7 +82,7 @@ export default function Signup() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
+              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Full Name</label>
               <input
                 type="text"
                 name="name"
@@ -90,11 +90,11 @@ export default function Signup() {
                 onChange={handleChange}
                 placeholder="John Doe"
                 required
-                className="input-field"
+                className="input-field border-gray-800 bg-[#1e1e1e] text-[#e0e0e0] placeholder-[#a0a0a0]"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email address</label>
+              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Email address</label>
               <input
                 type="email"
                 name="email"
@@ -102,11 +102,11 @@ export default function Signup() {
                 onChange={handleChange}
                 placeholder="you@example.com"
                 required
-                className="input-field"
+                className="input-field border-gray-800 bg-[#1e1e1e] text-[#e0e0e0] placeholder-[#a0a0a0]"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password</label>
+              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Password</label>
               <div className="relative">
                 <input
                   type={showPass ? 'text' : 'password'}
@@ -115,7 +115,7 @@ export default function Signup() {
                   onChange={handleChange}
                   placeholder="At least 6 characters"
                   required
-                  className="input-field pr-11"
+                  className="input-field pr-11 border-gray-800 bg-[#1e1e1e] text-[#e0e0e0] placeholder-[#a0a0a0]"
                 />
                 <button
                   type="button"

@@ -75,8 +75,8 @@ export default function LeadDetail() {
     return (
       <DashboardLayout>
         <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-gray-100 rounded-xl w-48" />
-          <div className="h-48 bg-gray-100 rounded-2xl" />
+          <div className="h-8 bg-[#1e1e1e] rounded-xl w-48" />
+          <div className="h-48 bg-[#1e1e1e] rounded-2xl" />
         </div>
       </DashboardLayout>
     );
@@ -86,11 +86,11 @@ export default function LeadDetail() {
     return (
       <DashboardLayout>
         <div className="text-center py-20">
-          <AlertCircle size={48} className="text-gray-300 mx-auto mb-3" />
+          <AlertCircle size={48} className="text-[#e0e0e0] mx-auto mb-3" />
           <p className="text-gray-500 font-medium">Lead not found</p>
           <Link
             to="/leads"
-            className="text-primary font-semibold hover:underline mt-2 inline-block"
+            className="text-[#a0a0a0] font-semibold hover:underline mt-2 inline-block"
           >
             ← Back to Leads
           </Link>
@@ -106,7 +106,7 @@ export default function LeadDetail() {
       <div className="mb-8">
         <Link
           to="/leads"
-          className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 font-medium mb-4"
+          className="inline-flex items-center gap-1.5 text-sm text-[#e0e0e0] hover:text-[#a0a0a0] font-medium mb-4"
         >
           <ArrowLeft size={15} /> Back to Leads
         </Link>
@@ -116,11 +116,11 @@ export default function LeadDetail() {
               {lead.businessName[0]}
             </div>
             <div>
-              <h1 className="text-2xl font-black text-gray-900">
+              <h1 className="text-2xl font-black text-[#e0e0e0]">
                 {lead.businessName}
               </h1>
               {lead.industry && (
-                <p className="text-gray-500">{lead.industry}</p>
+                <p className="text-[#a0a0a0]">{lead.industry}</p>
               )}
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function LeadDetail() {
             <button
               onClick={handleDelete}
               disabled={deleteLoading}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-red-200 text-red-500 text-sm font-semibold hover:bg-red-50 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl border border-gray-800 bg-[#1e1e1e] text-red-500 text-sm font-semibold hover:bg-red-50 transition-colors"
             >
               <Trash2 size={15} /> Delete
             </button>
@@ -137,8 +137,8 @@ export default function LeadDetail() {
       </div>
 
       {/* Status Progress */}
-      <div className="card p-6 mb-6">
-        <h2 className="font-bold text-gray-900 mb-5">Pipeline Status</h2>
+      <div className="card p-6 mb-6 bg-[#1e1e1e] border-gray-800">
+        <h2 className="font-bold text-[#e0e0e0] mb-5">Pipeline Status</h2>
         <div className="relative flex items-center justify-between mb-5">
           <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-100 z-0" />
           <div
@@ -174,20 +174,20 @@ export default function LeadDetail() {
             </button>
           ))}
         </div>
-        <p className="text-sm text-gray-500 text-center">
+        <p className="text-sm text-[#a0a0a0] text-center">
           Click a step to update the status
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-6">
         {/* Details */}
         <div className="lg:col-span-2 space-y-5">
           {/* Contact Info */}
-          <div className="card p-6">
-            <h2 className="font-bold text-gray-900 mb-4">
+          <div className="card p-6 bg-[#1e1e1e] border-gray-800 overflow-hidden">
+            <h2 className="font-bold text-[#e0e0e0] mb-4">
               Contact Information
             </h2>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 grid-cols-1 lg:gap-10 gap-4">
               {[
                 { icon: Globe, label: "Website", value: lead.website },
                 {
@@ -202,9 +202,9 @@ export default function LeadDetail() {
                   <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center shrink-0 mt-0.5">
                     <Icon size={14} className="text-gray-500" />
                   </div>
-                  <div>
-                    <p className="text-xs text-gray-400 font-medium">{label}</p>
-                    <p className="text-sm font-semibold text-gray-900 mt-0.5">
+                  <div className="w-full">
+                    <p className="text-xs text-[#e0e0e0] font-medium">{label}</p>
+                    <p className="text-sm font-semibold text-[#e0e0e0] mt-0.5 break-words lg:pr-2 lg:w-full w-[90%]">
                       {value || "—"}
                     </p>
                   </div>
@@ -215,9 +215,9 @@ export default function LeadDetail() {
 
           {/* AI Analysis */}
           {lead.whyTheyNeedYou && (
-            <div className="card p-6">
+            <div className="card p-6 border-gray-800 bg-[#1e1e1e]">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-bold text-gray-900">AI Analysis</h2>
+                <h2 className="font-bold text-[#e0e0e0]">AI Analysis</h2>
                 {lead.opportunityScore && (
                   <span
                     className={
@@ -240,30 +240,30 @@ export default function LeadDetail() {
 
           {/* Why they need you || Notes */}
           {lead.whyTheyNeedYou && (
-            <div className="card p-6">
-              <h2 className="font-bold text-gray-900 mb-3">
+            <div className="card p-6 bg-[#1e1e1e] border-gray-800">
+              <h2 className="font-bold text-[#e0e0e0] mb-3">
                 Why they need you
               </h2>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-[#e0e0e0] leading-relaxed">
                 {lead.whyTheyNeedYou}
               </p>
             </div>
           )}
 
           {/* Lead Messages */}
-          <div className="card p-6">
-            <h2 className="font-bold mb-4">Messages</h2>
+          <div className="card p-6 border-gray-800 bg-[#1e1e1e]">
+            <h2 className="font-bold mb-4 text-[#e0e0e0]">Messages</h2>
 
             {getLeadMessages.length === 0 ? (
-              <p className="text-gray-500 text-sm">No messages yet</p>
+              <p className="text-[#e0e0e0] text-sm">No messages yet</p>
             ) : (
               getLeadMessages.map((item, index) => (
-                <div key={index} className="mb-3 p-3 bg-gray-50 rounded-xl">
-                  <p className="text-xs text-gray-400">
+                <div key={index} className="mb-3 p-3 bg-[#121212] rounded-xl">
+                  <p className="text-xs text-[#a0a0a0]">
                     {item.isDraft ? "Draft" : "Sent"} • {item.messageType}
                   </p>
-                  <p className="font-semibold">{item.subject}</p>
-                  <p className="text-sm text-gray-600">{item.content}</p>
+                  <p className="font-semibold text-[#a0a0a0]">{item.subject}</p>
+                  <p className="text-sm text-[#e0e0e0]">{item.content}</p>
                 </div>
               ))
             )}
@@ -272,27 +272,27 @@ export default function LeadDetail() {
 
         {/* Quick Actions */}
         <div className="space-y-3">
-          <div className="card p-5">
-            <h3 className="font-bold text-gray-900 mb-4">Quick Actions</h3>
+          <div className="card p-5 bg-[#1e1e1e] border-gray-800">
+            <h3 className="font-bold text-[#e0e0e0] mb-4">Quick Actions</h3>
             <div className="space-y-2">
               <Link
                 to={`/leads/${id}/analyze`}
-                className="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-amber-50 text-amber-700 font-semibold text-sm hover:bg-amber-100 transition-colors"
+                className="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-primary text-[#e0e0e0] font-semibold text-sm hover:bg-[#121212] transition-colors"
               >
                 <Zap size={16} /> Run AI Analysis
               </Link>
               <Link
                 to={`/leads/${id}/message`}
-                className="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-primary-50 text-primary font-semibold text-sm hover:bg-primary-100 transition-colors"
+                className="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-red-500 text-[#e0e0e0] font-semibold text-sm hover:bg-[#121212] transition-colors"
               >
                 <MessageSquare size={16} /> Generate Pitch
               </Link>
             </div>
           </div>
 
-          <div className="card p-5 bg-gray-50">
-            <p className="text-xs text-gray-500 font-medium">Added</p>
-            <p className="text-sm font-semibold text-gray-900 mt-0.5">
+          <div className="card p-5 bg-[#1e1e1e] border-gray-800">
+            <p className="text-xs text-[#e0e0e0] font-medium">Added</p>
+            <p className="text-sm font-semibold text-[#a0a0a0] mt-0.5">
               {new Date(lead.createdAt).toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",

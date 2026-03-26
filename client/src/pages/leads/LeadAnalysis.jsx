@@ -53,23 +53,23 @@ export default function LeadAnalysis() {
   return (
     <DashboardLayout>
       <div className="mb-8">
-        <Link to={`/leads/${id}`} className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 font-medium mb-4">
+        <Link to={`/leads/${id}`} className="inline-flex items-center gap-1.5 text-sm text-[#e0e0e0] hover:text-[$a0a0a0] font-medium mb-4">
           <ArrowLeft size={15} /> Back to {lead?.businessName || 'Lead'}
         </Link>
-        <h1 className="text-2xl font-black text-gray-900">AI Opportunity Analysis</h1>
-        <p className="text-gray-500 mt-1">
+          <h1 className="text-2xl font-black text-[#e0e0e0]">AI Opportunity Analysis</h1>
+        <p className="text-[#a0a0a0] mt-1">
           {lead?.businessName ? `Analyzing ${lead.businessName}` : 'Analyzing lead...'}
         </p>
       </div>
 
       <div className="max-w-2xl">
         {!analysis ? (
-          <div className="card p-10 text-center">
+          <div className="card p-10 text-center bg-[#1e1e1e] border-gray-800">
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-6 shadow-lg">
               <Zap size={36} className="text-white" />
             </div>
-            <h2 className="text-xl font-black text-gray-900 mb-2">AI Opportunity Analysis</h2>
-            <p className="text-gray-500 mb-8 leading-relaxed">
+            <h2 className="text-xl font-black text-[#e0e0e0] mb-2">AI Opportunity Analysis</h2>
+            <p className="text-[#a0a0a0] mb-8 leading-relaxed">
               Our AI will analyze {lead?.businessName || 'this lead'} and generate a problem description, opportunity score, and outreach angle.
             </p>
             <button
@@ -93,7 +93,7 @@ export default function LeadAnalysis() {
           <div className="space-y-5">
             {/* Score Card */}
             {cfg && (
-              <div className={`card p-5 border ${cfg.className}`}>
+              <div className={`bg-[#1e1e1e] card p-5 border ${cfg.className}`}>
                 <div className="flex items-center gap-3">
                   <cfg.icon size={22} />
                   <div>
@@ -106,18 +106,18 @@ export default function LeadAnalysis() {
             )}
 
             {/* Reasoning */}
-            <div className="card p-6">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">AI Reasoning</p>
-              <p className="text-gray-700 leading-relaxed">{analysis.reasoning}</p>
+            <div className="card p-6 bg-[#1e1e1e] border-gray-800">
+              <p className="text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide mb-1">AI Reasoning</p>
+              <p className="text-[#a0a0a0] leading-relaxed">{analysis.reasoning}</p>
             </div>
 
             {/* Problem Description */}
-            <div className="card p-6">
+            <div className="card p-6 bg-[#1e1e1e] border-gray-800">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Problem Description</p>
+                <p className="text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide">Problem Description</p>
                 <button
                   onClick={() => setEditing(!editing)}
-                  className="text-xs text-primary font-semibold hover:underline flex items-center gap-1"
+                  className="text-xs text-primary-100 font-semibold hover:underline flex items-center gap-1"
                 >
                   <Edit3 size={12} /> {editing ? 'Done' : 'Edit'}
                 </button>
@@ -130,12 +130,12 @@ export default function LeadAnalysis() {
                   className="input-field resize-none"
                 />
               ) : (
-                <p className="text-gray-700 leading-relaxed">{editedProblem || analysis.problemDescription}</p>
+                <p className="text-[#a0a0a0] leading-relaxed">{editedProblem || analysis.problemDescription}</p>
               )}
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3">
+            <div className="flex gap-3 lg:flex-row flex-col">
               <button onClick={acceptAnalysis} className="btn-primary flex items-center gap-2">
                 <CheckCircle size={16} /> Accept & Save
               </button>

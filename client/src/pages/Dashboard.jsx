@@ -129,10 +129,10 @@ const handleFindLeads = async () => {
       {/* dashboard header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-black text-gray-900">
+          <h1 className="text-2xl font-black text-[#E0E0E0]">
             Hello, {user?.name?.split(' ')[0]} 👋
           </h1>
-          <p className="text-gray-500 mt-1 lg:text-lg text-sm">
+          <p className="text-[#A0A0A0] mt-1 lg:text-lg text-s">
             Here's what's happening with your outreach.
           </p>
         </div>
@@ -147,16 +147,16 @@ const handleFindLeads = async () => {
       {/* Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {statCards.map(({ label, value, icon: Icon, color }) => (
-          <div key={label} className="card p-5">
+          <div key={label} className="card p-5 bg-[#1E1E1E] cursor-pointer border-gray-800">
             <div
               className={`w-11 h-11 rounded-xl ${color} flex items-center justify-center mb-3`}
             >
               <Icon size={20} />
             </div>
-            <p className="text-sm text-gray-500 font-medium">{label}</p>
-            <p className="text-3xl font-black text-gray-900 mt-0.5">
+            <p className="text-sm text-[#E0E0E0] font-medium">{label}</p>
+            <p className="text-3xl font-black text-[#E0E0E0] mt-0.5">
               {loading ? (
-                <span className="inline-block w-8 h-7 bg-gray-100 rounded animate-pulse" />
+                <span className="inline-block w-8 h-7 bg-[#121212] rounded animate-pulse" />
               ) : (
                 value
               )}
@@ -166,16 +166,16 @@ const handleFindLeads = async () => {
       </div>
 
       {/* Lead Finder Card */}
-      <div className="card p-6 mb-8">
-        <h2 className="font-bold text-gray-900 mb-2">Find Leads</h2>
-        <p className="text-sm text-gray-500 mb-4">
+      <div className="card p-6 mb-8 bg-[#1E1E1E] border-gray-800">
+        <h2 className="font-bold text-[#E0E0E0] mb-2">Find Leads</h2>
+        <p className="text-sm text-[#A0A0A0] border-gray-800 mb-4">
           Select a skill and niche to see potential lead opportunities.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <select
             required
-            className="input-field w-full"
+            className="input-field w-full bg-[#121212] text-[#E0E0E0] border-gray-800"
             value={skill}
             onChange={(e) => setSkill(e.target.value)}
           >
@@ -187,7 +187,7 @@ const handleFindLeads = async () => {
 
           <select
             required
-            className="input-field w-full"
+            className="input-field w-full bg-[#121212] text-[#E0E0E0] border-gray-800"
             value={niche}
             onChange={(e) => setNiche(e.target.value)}
           >
@@ -205,18 +205,18 @@ const handleFindLeads = async () => {
         {/* Suggestions */}
         {suggestedLeads.length > 0 && (
           <div className="mt-4">
-            <p className="text-sm font-medium text-gray-700 mb-2">
+            <p className="text-sm font-medium text-[#e0e0e0] mb-2">
               Suggestions:
             </p>
             <ul className="space-y-2">
               {suggestedLeads.map((lead, idx) => (
                 <li
                   key={idx}
-                  className="p-3 bg-gray-50 rounded-xl flex items-start flex-col gap-5"
+                  className="p-3 bg-[#121212] rounded-xl flex items-start flex-col gap-5"
                 >
                   <div className="space-y-1">
-                    <p className="font-semibold">{lead.title}</p>
-                    <p className="text-xs text-gray-400">{lead.note}</p>
+                    <p className="font-semibold text-[#e0e0e0]">{lead.title}</p>
+                    <p className="text-xs text-[#a0a0a0]">{lead.note}</p>
                   </div>
                   <button
                     onClick={() => handleUseIdea(lead)}
@@ -233,12 +233,12 @@ const handleFindLeads = async () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Recent Leads */}
-        <div className="lg:col-span-2 card p-6">
+        <div className="lg:col-span-2 card p-6 bg-[#1E1E1E] border-gray-800">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="font-bold text-gray-900">Recent Leads</h2>
+            <h2 className="font-bold text-[#E0E0E0]">Recent Leads</h2>
             <Link
               to="/leads"
-              className="text-sm text-primary font-semibold hover:underline flex items-center gap-1"
+              className="text-sm text-[#A0A0A0] font-semibold hover:underline flex items-center gap-1"
             >
               View All <ArrowRight size={14} />
             </Link>
@@ -248,37 +248,37 @@ const handleFindLeads = async () => {
               {[...Array(3)].map((_, i) => (
                 <div
                   key={i}
-                  className="h-14 bg-gray-50 rounded-xl animate-pulse"
+                  className="h-14 bg-[#121212] rounded-xl animate-pulse"
                 />
               ))}
             </div>
           ) : leads.length === 0 ? (
             <div className="text-center py-12">
-              <Users size={40} className="text-gray-300 mx-auto mb-3" />
+              <Users size={40} className="text-[#E0E0E0] mx-auto mb-3" />
               <p className="text-gray-500 font-medium">No leads yet</p>
               <Link
                 to="/leads/add"
-                className="text-primary text-sm font-semibold hover:underline mt-2 inline-block"
+                className="text-[#E0E0E0] text-sm font-semibold hover:underline mt-2 inline-block"
               >
                 Add your first lead →
               </Link>
             </div>
           ) : (
-            <div className="space-y-2">
+            <div className="space-y-2 bg-[#121212] rounded-xl border-gray-800">
               {leads.map((lead) => (
                 <Link
                   key={lead._id}
                   to={`/leads/${lead._id}`}
-                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors group"
+                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-[#1e1e1e] transition-colors group"
                 >
                   <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary font-bold text-sm flex items-center justify-center shrink-0">
                     {lead.businessName[0]}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-900 truncate group-hover:text-primary transition-colors">
+                    <p className="font-semibold text-[#e0e0e0] truncate group-hover:text-[#A0A0A0] transition-colors">
                       {lead.businessName}
                     </p>
-                    <p className="text-xs text-gray-500 truncate">
+                    <p className="text-xs text-[#A0A0A0] truncate">
                       {lead.website || lead.socialHandle || "No website"}
                     </p>
                   </div>
@@ -309,8 +309,8 @@ const handleFindLeads = async () => {
         </div>
 
         {/* Action Items */}
-        <div className="card p-6">
-          <h2 className="font-bold text-gray-900 mb-4">Action Items</h2>
+        <div className="card p-6 bg-[#1e1e1e]  border-gray-800">
+          <h2 className="font-bold text-[#e0e0e0] mb-4">Action Items</h2>
           <div className="space-y-3">
             <div className="p-4 bg-success/5 border border-success/20 rounded-xl">
               <div className="flex items-center gap-2 mb-1">
@@ -319,7 +319,7 @@ const handleFindLeads = async () => {
                   High Opportunity
                 </span>
               </div>
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-[#e0e0e0]">
                 You have{" "}
                 <span className="font-bold">{stats?.highOpportunity ?? 0}</span>{" "}
                 leads marked as high potential.

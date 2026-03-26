@@ -51,8 +51,8 @@ export default function Settings() {
   return (
     <DashboardLayout>
       <div className="mb-8">
-        <h1 className="text-2xl font-black text-gray-900">Settings</h1>
-        <p className="text-gray-500 mt-1">Manage your account and preferences.</p>
+        <h1 className="text-2xl font-black text-[#e0e0e0]">Settings</h1>
+        <p className="text-[#a0a0a0] mt-1">Manage your account and preferences.</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
@@ -69,60 +69,60 @@ export default function Settings() {
             </div>
           )}
 
-          <div className="card p-6">
-            <div className="flex items-center gap-3 mb-6 pb-5 border-b border-gray-100">
+          <div className="card p-6 bg-[#1e1e1e] border-gray-800">
+            <div className="flex items-center gap-3 mb-6 pb-5 border-b border-gray-800">
               <User size={18} className="text-gray-500" />
-              <h2 className="font-bold text-gray-900">Profile Information</h2>
+              <h2 className="font-bold text-[#e0e0e0]">Profile Information</h2>
             </div>
 
             <div className="space-y-4">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
+                  <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Full Name</label>
                   <input
                     type="text"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="Your name"
-                    className="input-field"
+                    className="input-field border-gray-800 bg-[#121212] text-[#e0e0e0]"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
+                  <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Email</label>
                   <input
                     type="email"
                     value={profile?.email || ''}
                     disabled
-                    className="input-field bg-gray-50 text-gray-400 cursor-not-allowed"
+                    className="input-field border-gray-800 bg-[#121212] text-[#6A6A6A] cursor-not-allowed"
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Freelance Category</label>
+                <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Freelance Category</label>
                 <input
                   type="text"
                   value={form.freelanceCategory}
                   onChange={(e) => setForm({ ...form, freelanceCategory: e.target.value })}
                   placeholder="e.g. Web Designer, Copywriter, Social Media Manager"
-                  className="input-field"
+                  className="input-field border-gray-800 bg-[#121212] text-[#e0e0e0]"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">
                   Bio / Context for AI
-                  <span className="text-gray-400 font-normal ml-1.5 text-xs">This helps our AI write better pitches by understanding who you are.</span>
+                  <span className="text-[#a0a0a0] font-normal ml-1.5 text-xs">This helps our AI write better pitches by understanding who you are.</span>
                 </label>
                 <textarea
                   value={form.bio}
                   onChange={(e) => setForm({ ...form, bio: e.target.value })}
                   rows={4}
                   placeholder="I am a specialized web developer focusing on React and conversion optimization..."
-                  className="input-field resize-none"
+                  className="input-field resize-none border-gray-800 bg-[#121212] text-[#e0e0e0]"
                 />
               </div>
             </div>
 
-            <div className="pt-5 mt-5 border-t border-gray-100">
+            <div className="pt-5 mt-5 border-t border-gray-800">
               <button type="submit" disabled={saving || loading} className="btn-primary">
                 {saving ? 'Saving...' : 'Save Changes'}
               </button>

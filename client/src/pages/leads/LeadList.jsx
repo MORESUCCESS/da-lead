@@ -41,8 +41,8 @@ export default function LeadList() {
     <DashboardLayout>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-black text-gray-900">Leads Pipeline</h1>
-          <p className="text-gray-500 mt-1">Manage and track your outreach opportunities.</p>
+          <h1 className="text-2xl font-black text-[#e0e0e0]">Leads Pipeline</h1>
+          <p className="text-[#a0a0a0] mt-1">Manage and track your outreach opportunities.</p>
         </div>
         <Link to="/leads/add" className="btn-primary text-sm flex items-center gap-2">
           <Plus size={16} /> <span className='lg:flex hidden'>Add Lead</span>
@@ -50,15 +50,15 @@ export default function LeadList() {
       </div>
 
       {/* Filters */}
-      <div className="card p-4 mb-5 flex flex-col sm:flex-row gap-3">
+      <div className="card p-4 mb-5 flex flex-col sm:flex-row gap-3 bg-[#1e1e1e] border-gray-800">
         <div className="relative flex-1">
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#a0a0a0]" />
           <input
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search business or website..."
-            className="input-field pl-10 !py-2.5"
+            className="input-field pl-10 !py-2.5 bg-[#121212] text-[#e0e0e0] border-gray-800"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -66,7 +66,7 @@ export default function LeadList() {
           <select
             value={statusFilter}
             onChange={(e) => setSearchParams(e.target.value ? { status: e.target.value } : {})}
-            className="input-field !py-2.5 !w-auto min-w-[150px]"
+            className="input-field !py-2.5 !w-auto min-w-[150px] bg-[#121212] border-gray-800 text-[#e0e0e0]"
           >
             <option value="">All Statuses</option>
             <option value="not_contacted">Not Contacted</option>
@@ -78,16 +78,16 @@ export default function LeadList() {
       </div>
 
       {/* Table */}
-      <div className="card overflow-hidden">
+      <div className="card overflow-hidden bg-[#121212] border-gray-800">
         {loading ? (
           <div className="p-8 space-y-3">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-16 bg-gray-50 rounded-xl animate-pulse" />
+              <div key={i} className="h-16 bg-[1e1e1e] rounded-xl animate-pulse" />
             ))}
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-16">
-            <Users size={48} className="text-gray-200 mx-auto mb-3" />
+            <Users size={48} className="text-[#e0e0e0] mx-auto mb-3" />
             <p className="font-semibold text-gray-500">No leads found</p>
             <p className="text-sm text-gray-400 mt-1">We couldn't find any leads matching your current filters.</p>
             <Link to="/leads/add" className="text-primary text-sm font-semibold hover:underline mt-3 inline-block">
@@ -96,27 +96,27 @@ export default function LeadList() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full bg-[#1e1e1e]">
               <thead>
-                <tr className="border-b border-gray-100">
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Business</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden md:table-cell">Website</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">Social</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Score</th>
-                  <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Status</th>
-                  <th className="text-right px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Actions</th>
+                <tr className="border-b border-gray-800">
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide">Business</th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide hidden md:table-cell">Website</th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide hidden sm:table-cell">Social</th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide">Score</th>
+                  <th className="text-left px-6 py-4 text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide">Status</th>
+                  <th className="text-right px-6 py-4 text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-50">
+              <tbody className="divide-y divide-gray-800">
                 {filtered.map((lead) => (
-                  <tr key={lead._id} className="hover:bg-gray-50/50 transition-colors">
+                  <tr key={lead._id} className="hover:bg-[#121212] cursor-pointer transition-colors">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-xl bg-primary-50 text-primary font-bold text-sm flex items-center justify-center shrink-0">
                           {lead.businessName[0]}
                         </div>
                         <div className="min-w-0">
-                          <p className="font-semibold text-gray-900 truncate">{lead.businessName}</p>
+                          <p className="font-semibold text-[#e0e0e0] truncate">{lead.businessName}</p>
                           {lead.industry && <p className="text-xs text-gray-400 truncate">{lead.industry}</p>}
                         </div>
                       </div>
@@ -124,7 +124,7 @@ export default function LeadList() {
                     <td className="px-6 py-4 hidden md:table-cell">
                       {lead.website ? (
                         <a href={`https://${lead.website.replace(/^https?:\/\//, '')}`} target="_blank" rel="noreferrer"
-                          className="text-sm text-primary hover:underline flex items-center gap-1 max-w-[160px] truncate">
+                          className="text-sm text-violet-500 hover:underline flex items-center gap-1 max-w-[160px] truncate">
                           {lead.website.replace(/^https?:\/\//, '')}
                           <ExternalLink size={12} className="shrink-0" />
                         </a>
@@ -159,7 +159,7 @@ export default function LeadList() {
                       <div className="flex items-center justify-end gap-2">
                         <Link
                           to={`/leads/${lead._id}`}
-                          className="text-xs font-semibold text-gray-600 hover:text-primary px-3 py-1.5 rounded-lg hover:bg-primary-50 transition-colors"
+                          className="text-xs font-semibold text-[#a0a0a0] hover:text-primary px-3 py-1.5 rounded-lg hover:bg-primary-50 transition-colors"
                         >
                           View
                         </Link>

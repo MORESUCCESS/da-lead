@@ -64,11 +64,11 @@ export default function LeadMessage() {
   return (
     <DashboardLayout>
       <div className="mb-8">
-        <Link to={`/leads/${id}`} className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 font-medium mb-4">
+        <Link to={`/leads/${id}`} className="inline-flex items-center gap-1.5 text-sm text-[#e0e0e0] hover:text-gray-900 font-medium mb-4">
           <ArrowLeft size={15} /> Back to {lead?.businessName || 'Lead'}
         </Link>
-        <h1 className="text-2xl font-black text-gray-900">AI Message Generator</h1>
-        <p className="text-gray-500 mt-1">
+        <h1 className="text-2xl font-black text-[#e0e0e0]">AI Message Generator</h1>
+        <p className="text-[#a0a0a0] mt-1">
           Generate a personalized outreach message for {lead?.businessName || 'this lead'}.
         </p>
       </div>
@@ -82,16 +82,16 @@ export default function LeadMessage() {
       <div className="grid lg:grid-cols-5 gap-6">
         {/* Left: Config */}
         <div className="lg:col-span-2 space-y-5">
-          <div className="card p-6">
+          <div className="card p-6 bg-[#1e1e1e] border-gray-800">
             <div className="flex items-center gap-2.5 mb-5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <Zap size={16} className="text-white" />
               </div>
-              <h2 className="font-bold text-gray-900">AI Writer</h2>
+              <h2 className="font-bold text-[#e0e0e0]">AI Writer</h2>
             </div>
 
             <div className="mb-5">
-              <p className="text-sm font-semibold text-gray-700 mb-3">Message Type</p>
+              <p className="text-sm font-semibold text-[#a0a0a0] mb-3">Message Type</p>
               <div className="space-y-2">
                 {messageTypes.map((t) => (
                   <button
@@ -99,8 +99,8 @@ export default function LeadMessage() {
                     onClick={() => setMessageType(t.value)}
                     className={`w-full text-left px-4 py-3 rounded-xl border-2 transition-all duration-150
                       ${messageType === t.value
-                        ? 'border-primary bg-primary-50 text-primary'
-                        : 'border-gray-100 bg-gray-50 text-gray-700 hover:border-gray-200'
+                        ? 'border-primary bg-gray-300 text-[#121212]'
+                        : 'border-gray-800 bg-[#121212] text-[#e0e0e0] hover:border-gray-600'
                       }`}
                   >
                     <p className="font-semibold text-sm">{t.label}</p>
@@ -111,7 +111,7 @@ export default function LeadMessage() {
             </div>
 
             <div className="mb-5">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-[#e0e0e0] mb-2">
                 Additional Context <span className="text-gray-400 font-normal">(Optional)</span>
               </label>
               <textarea
@@ -119,7 +119,7 @@ export default function LeadMessage() {
                 onChange={(e) => setCustomContext(e.target.value)}
                 rows={3}
                 placeholder="E.g., mention we share a connection, or focus on their recent product launch..."
-                className="input-field resize-none text-sm"
+                className="input-field resize-none text-sm bg-[#1e1e1e] border-gray-800 text-[#e0e0e0]"
               />
             </div>
 
@@ -144,37 +144,37 @@ export default function LeadMessage() {
 
         {/* Right: Editor */}
         <div className="lg:col-span-3">
-          <div className="card p-6 h-full flex flex-col">
+          <div className="card p-6 h-full flex flex-col bg-[#1e1e1e] border-gray-800">
             {!generated ? (
               <div className="flex-1 flex items-center justify-center text-center py-16">
                 <div>
                   <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center mx-auto mb-4">
                     <Edit3 size={24} className="text-gray-400" />
                   </div>
-                  <p className="text-gray-500 font-medium">Your message will appear here</p>
-                  <p className="text-sm text-gray-400 mt-1">Click "Generate Draft" to get started</p>
+                  <p className="text-[#e0e0e0] font-medium">Your message will appear here</p>
+                  <p className="text-sm text-[#a0a0a0] mt-1">Click "Generate Draft" to get started</p>
                 </div>
               </div>
             ) : (
               <div className="flex-1 flex flex-col">
                 <div className="mb-4">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Subject Line</label>
+                  <label className="block text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide mb-1.5">Subject Line</label>
                   <input
                     type="text"
                     value={editedSubject}
                     onChange={(e) => setEditedSubject(e.target.value)}
-                    className="input-field font-semibold"
+                    className="input-field font-semibold bg-[#121212] border-gray-800 text-[#e0e0e0]"
                   />
                 </div>
                 <div className="flex-1 flex flex-col">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">Message Body</label>
+                  <label className="block text-xs font-semibold text-[#e0e0e0] uppercase tracking-wide mb-1.5">Message Body</label>
                   <textarea
                     value={editedContent}
                     onChange={(e) => setEditedContent(e.target.value)}
-                    className="input-field resize-none flex-1 min-h-[280px] font-mono text-sm leading-relaxed"
+                    className="input-field resize-none flex-1 min-h-[280px] font-mono text-sm leading-relaxed bg-[#121212] border-gray-800 text-[#e0e0e0]"
                   />
                 </div>
-                <div className="flex gap-2 mt-4 pt-4 border-t border-gray-100 flex-wrap">
+                <div className="flex gap-2 mt-4 pt-4 border-t border-gray-800 flex-wrap">
                   <button onClick={copy} className="btn-secondary text-sm !py-2.5 !px-4 flex items-center gap-1.5">
                     {copied ? <CheckCircle size={15} className="text-success" /> : <Copy size={15} />}
                     {copied ? 'Copied!' : 'Copy'}

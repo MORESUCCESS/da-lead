@@ -30,17 +30,17 @@ export default function Login() {
   return (
     <div className="min-h-screen flex">
       {/* Left — form */}
-      <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-12 bg-white">
+      <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-12 bg-[#121212]">
         <div className="max-w-md w-full mx-auto">
           <Link to="/" className="flex items-center gap-2 mb-10">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Target size={16} className="text-white" />
             </div>
-            <span className="font-bold text-xl text-gray-900">FynLead</span>
+            <span className="font-bold text-xl text-[#e0e0e0]">Da-Lead</span>
           </Link>
 
-          <h1 className="text-3xl font-black text-gray-900 mb-2">Welcome back</h1>
-          <p className="text-gray-500 mb-8">Sign in to your account to continue</p>
+          <h1 className="text-3xl font-black text-[#e0e0e0] mb-2">Welcome back</h1>
+          <p className="text-[#a0a0a0] mb-8">Sign in to your account to continue</p>
 
           {error && (
             <div className="flex items-center gap-2.5 bg-red-50 border border-red-200 text-red-700 text-sm font-medium px-4 py-3 rounded-xl mb-6">
@@ -51,7 +51,7 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email address</label>
+              <label className="block text-sm font-semibold text-[#e0e0e0] mb-1.5">Email address</label>
               <input
                 type="email"
                 name="email"
@@ -59,12 +59,12 @@ export default function Login() {
                 onChange={handleChange}
                 placeholder="you@example.com"
                 required
-                className="input-field"
+                className="input-field border-gray-800 bg-[#1e1e1e] text-[#e0e0e0] placeholder-[#a0a0a0]"
               />
             </div>
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-sm font-semibold text-gray-700">Password</label>
+                <label className="text-sm font-semibold text-[#e0e0e0]">Password</label>
                 <button type="button" className="text-sm text-primary font-medium hover:underline">
                   Forgot password?
                 </button>
@@ -77,7 +77,7 @@ export default function Login() {
                   onChange={handleChange}
                   placeholder="••••••••"
                   required
-                  className="input-field pr-11"
+                  className="input-field pr-11 border-gray-800 bg-[#1e1e1e] text-[#e0e0e0] placeholder-[#a0a0a0]"
                 />
                 <button
                   type="button"
@@ -106,7 +106,7 @@ export default function Login() {
       <div className="hidden lg:flex flex-1 bg-gradient-to-br from-gray-900 via-primary-dark to-gray-900 items-end p-14">
         <blockquote className="max-w-sm">
           <p className="text-white text-xl font-semibold leading-relaxed mb-5">
-            "FynLead completely transformed my freelance business. I'm spending less time searching and more time closing."
+            "Da-Lead completely transformed my freelance business. I'm spending less time searching and more time closing."
           </p>
           <footer className="text-gray-400 text-sm font-medium">— Sarah J., Brand Designer</footer>
         </blockquote>
