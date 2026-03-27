@@ -102,7 +102,7 @@ export default function DashboardLayout({ children }) {
             <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Target size={14} className="text-white" />
             </div>
-            <span className="font-bold text-lg text-[#e0e0e0]">Da-Lead</span>
+            <span className="font-bold text-lg text-[#e0e0e0]">Da-<span className='text-accent'>Lead</span></span>
           </div>
         </header>
 
