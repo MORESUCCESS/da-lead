@@ -166,24 +166,24 @@ export default function Landing() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative lg:py-12 py-[85px]">
             <div className="flex items-center w-full justify-center">
               <div>
-                <div className="inline-flex items-center gap-2 bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+                <div data-aos="fade-up" className="inline-flex items-center gap-2 bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
                   <Zap size={14} />
                   <span>AI-Powered Lead Outreach</span>
                 </div>
-                <h1 className="lg:text-5xl text-4xl font-black text-[#E0E0E0] leading-tight mb-6">
+                <h1 data-aos="fade-right" className="lg:text-5xl text-4xl font-black text-[#E0E0E0] leading-tight mb-6">
                   Find leads, send {" "}
                   <br className="lg:flex hidden" />
                   smarter ptiches,{" "}
                   <span className="text-primary">and close</span>{" "}
                   <span className="text-accent">deals.</span>
                 </h1>
-                <p className="lg:text-lg text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto">
+                <p data-aos="fade-in" className="lg:text-lg text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto">
                   The all-in-one platform for freelancers and online hustlers to
                   find leads, analyze opportunities, and generate AI-powered
                   pitches that actually convert.
                 </p>
                 <div className="flex w-full items-center justify-center">
-                  <Link to="/signup" className="btn-primary rounded-full text-center px-10 bg-primary">
+                  <Link to="/signup" data-aos="zoom-in" className="btn-primary rounded-full text-center px-10 bg-primary">
                     Start Now <ArrowRight size={16} className="inline ml-1" />
                   </Link>
                 </div>
@@ -196,10 +196,10 @@ export default function Landing() {
         <section className="relative overflow-hidden py-20 bg-[#121212]">
           <div className="absolute top-[-40%] left-0 w-64 h-64 bg-primary/50 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <h2 className="text-3xl text-[#E0E0E0] sm:text-4xl font-black text-white mb-4">
+            <h2 data-aos="fade-up" className="text-3xl text-[#E0E0E0] sm:text-4xl font-black text-white mb-4">
               Sound familiar?
             </h2>
-            <p className="text-[#A0A0A0] mb-12 text-lg">
+            <p data-aos="fade-up" className="text-[#A0A0A0] mb-12 text-lg">
               Every freelancer struggles with the same lead generation
               nightmare.
             </p>
@@ -207,6 +207,7 @@ export default function Landing() {
               {painPoints.map((point) => (
                 <div
                   key={point}
+                  data-aos="fade-right"
                   className="flex items-start gap-5 bg-[#1E1E1E] rounded-2xl p-5 text-left border border-white/10 hover:scale-105 duration-300 cursor-pointer"
                 >
                   <XCircle size={20} className="text-accent shrink-0 mt-0.5" />
@@ -223,7 +224,7 @@ export default function Landing() {
           className="py-24 bg-gradient-to-br bg-[#1E1E1E]"
         >
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
+            <div data-aos="fade-up" className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-black text-[#E0E0E0] mb-4">
                 How Da-Lead Works
               </h2>
@@ -235,6 +236,7 @@ export default function Landing() {
               {steps.map((step, i) => (
                 <div
                   key={step.title}
+                  data-aos="fade-down"
                   className="relative cursor-pointer hover:scale-110 transition-transform duration-300"
                 >
                   {i < steps.length - 1 && (
@@ -268,7 +270,7 @@ export default function Landing() {
         {/* Features */}
         <section id="features" className="py-24 bg-[#121212]">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
+            <div data-aos="fade-right" className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-black text-[#E0E0E0] mb-4">
                 Everything You Need to Close Deals
               </h2>
@@ -281,6 +283,7 @@ export default function Landing() {
               {features.map((f) => (
                 <div
                   key={f.title}
+                  data-aos="fade-down"
                   className="card p-7 bg-[#1E1E1E] border-white/10 hover:scale-105 transition-transform duration-300 cursor-pointer"
                 >
                   <div
@@ -301,14 +304,14 @@ export default function Landing() {
         {/* CTA */}
         <section className="py-24 bg-[#1E1E1E]">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-            <h2 className="text-3xl sm:text-4xl font-black text-[#E0E0E0] mb-4">
+            <h2 data-aos="fade-up" className="text-3xl sm:text-4xl font-black text-[#E0E0E0] mb-4">
               Ready to fill your pipeline?
             </h2>
-            <p className="text-[#E0E0E0] text-lg mb-10">
+            <p data-aos="fade-right" className="text-[#E0E0E0] text-lg mb-10">
               Join hundreds of freelancers already closing more deals with
               Da-Lead.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+            <div data-aos="fade-down" className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"

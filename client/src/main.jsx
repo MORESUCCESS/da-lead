@@ -4,6 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import {GoogleOAuthProvider} from '@react-oauth/google';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+// Animations
+AOS.init({
+  duration: 700,
+  once: true,
+  easing: 'ease-out'
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
