@@ -82,7 +82,7 @@ export default function Landing() {
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm">
               <Target size={16} className="text-white" strokeWidth={2.5} />
             </div>
-            <span className="font-bold lg:text-xl text-gray-200">Da-Lead</span>
+            <span className="font-bold lg:text-xl text-gray-200">Da-<span className="text-accent">Lead</span></span>
           </div>
           <div className="lg:flex hidden md:gap-6">
             <a
@@ -113,7 +113,7 @@ export default function Landing() {
             </Link>
 
             {/* amburger menu icon */}
-            <div className="text-amber-600 lg:hidden block">
+            <div className="text-accent lg:hidden block">
               <Hamburger
                 size={25}
                 toggled={isOpen}
