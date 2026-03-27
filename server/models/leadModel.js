@@ -8,6 +8,7 @@ const leadSchema = new mongoose.Schema({
   status: { type: String, enum: ['not_contacted', 'contacted', 'replied', 'closed'], default: 'not_contacted' },
   opportunityScore: { type: String, enum: ['low', 'medium', 'high'], default: 'low' },
   whyTheyNeedYou: { type: String },
+  problemDescription: {type: String},
   pitchTemplate: { type: String },
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 }, { timestamps: true });

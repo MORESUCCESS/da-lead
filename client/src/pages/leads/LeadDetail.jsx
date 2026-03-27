@@ -214,7 +214,7 @@ export default function LeadDetail() {
           </div>
 
           {/* AI Analysis */}
-          {lead.whyTheyNeedYou && (
+          {lead.problemDescription && (
             <div className="card p-6 border-gray-800 bg-[#1e1e1e]">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-bold text-[#e0e0e0]">AI Analysis</h2>
@@ -242,7 +242,7 @@ export default function LeadDetail() {
           {lead.whyTheyNeedYou && (
             <div className="card p-6 bg-[#1e1e1e] border-gray-800">
               <h2 className="font-bold text-[#e0e0e0] mb-3">
-                Why they need you
+                Personal notes
               </h2>
               <p className="text-[#e0e0e0] leading-relaxed">
                 {lead.whyTheyNeedYou}
