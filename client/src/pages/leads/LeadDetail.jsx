@@ -232,7 +232,7 @@ export default function LeadDetail() {
                   </span>
                 )}
               </div>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-[#e0e0e0] leading-relaxed">
                 {lead.problemDescription}
               </p>
             </div>
