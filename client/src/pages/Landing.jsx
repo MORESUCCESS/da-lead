@@ -154,7 +154,7 @@ export default function Landing() {
           </ul>
       </header>
         {isOpen && (
-          <div className="fixed h-[37%] inset-0 bg-black/20 backdrop-blur-sm z-40"></div>
+          <div className="fixed h-[45%] inset-0 bg-black/20 backdrop-blur-sm z-40"></div>
         )}
 
       <main className="flex-1">
