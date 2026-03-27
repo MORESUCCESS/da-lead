@@ -262,7 +262,7 @@ export default function LeadDetail() {
                   <p className="text-xs text-[#a0a0a0]">
                     {item.isDraft ? "Draft" : "Sent"} • {item.messageType}
                   </p>
-                  <p className="font-semibold text-[#a0a0a0]">{item.subject}</p>
+                  <p className="font-semibold text-[#e0e0e0] mb-2">{item.subject}</p>
                   <p className="text-sm text-[#e0e0e0]">{item.content}</p>
                 </div>
               ))
