@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config();
 const cookie_parser = require('cookie-parser');
 const connectToDb = require('./config/mongodb.js');
 const authRouter = require('./routes/authRoutes.js');
