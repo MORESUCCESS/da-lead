@@ -163,21 +163,21 @@ export default function Landing() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-accent/40 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
           <div className="absolute bottom-20 left-0 w-64 h-64 bg-primary/50 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 relative lg:py-12 py-28">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 relative lg:py-12 py-[85px]">
             <div className="flex items-center w-full justify-center">
               <div>
                 <div className="inline-flex items-center gap-2 bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
                   <Zap size={14} />
                   <span>AI-Powered Lead Outreach</span>
                 </div>
-                <h1 className="text-5xl sm:text-6xl font-black text-[#E0E0E0] leading-tight mb-6">
-                  Find leads, send
+                <h1 className="lg:text-5xl text-4xl font-black text-[#E0E0E0] leading-tight mb-6">
+                  Find leads, send {" "}
                   <br className="lg:flex hidden" />
                   smarter ptiches,{" "}
                   <span className="text-primary">and close</span>{" "}
                   <span className="text-accent">deals.</span>
                 </h1>
-                <p className="lg:text-lg text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+                <p className="lg:text-lg text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto">
                   The all-in-one platform for freelancers and online hustlers to
                   find leads, analyze opportunities, and generate AI-powered
                   pitches that actually convert.
