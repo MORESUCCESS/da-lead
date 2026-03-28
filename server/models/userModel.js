@@ -21,6 +21,16 @@ const userSchema = new mongoose.Schema(
       default: "local",
     },
     avatar: String,
+
+    location: {
+      type: String,
+      default: ""
+    },
+    lastGeneratedDate: {
+      type: String,
+      default: ""
+    },
+    dailyLeads: { type: Array, default: [] },
   },
   { timestamps: true },
 );

@@ -44,8 +44,13 @@ export default function AddLead() {
     {
       setForm((prev)=>({
         ...prev, 
-        industry: idea.niche || '',
-        notes: idea.ideaNote || ''
+        businessName: idea.ideaTitle || '',
+        notes: idea.ideaNote || '',
+        website: idea.ideaWebsite || '',
+        email: idea.ideaEmailAddress || '',
+        socailHandle: idea.socialHandle || '',
+        industry: idea.industry || '',
+
       }))
     }
   },[idea])

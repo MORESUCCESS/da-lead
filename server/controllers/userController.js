@@ -18,9 +18,9 @@ const UserDetails = async (req, res) => {
 
 // update user profile
 const UpdateUser = async (req, res) => {
-  const { name, freelanceCategory, bio } = req.body;
+  const { name, freelanceCategory, bio, location} = req.body;
 
-  if (!name && !freelanceCategory && !bio) {
+  if (!name && !freelanceCategory && !bio && !location) {
     return res.status(400).json({
       success: false,
       message: "No data to update",
@@ -34,6 +34,7 @@ const UpdateUser = async (req, res) => {
         ...(name && { name }),
         ...(freelanceCategory && { freelanceCategory }),
         ...(bio && { bio }),
+        ...(location && {location}),
       },
       {
         new: true, // return updated user

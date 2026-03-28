@@ -33,16 +33,34 @@ export default function Dashboard() {
   const [stats, setStats] = useState(null);
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [dailyLeads, setDailyLeads] = useState([]);
+  const [leadsLoading, setLeadsLoading] = useState(true);
+  const [profileIncomplete, SetProfileIncomplete] = useState(false);
+  const [leadError, setLeadError] = useState("");
 
-  useEffect(() => {
-    Promise.all([api.get("/dashboard/stats"), api.get("/leads")])
-      .then(([statsRes, leadsRes]) => {
-        setStats(statsRes.data);
-        setLeads(leadsRes.data.slice(0, 5));
-      })
-      .finally(() => setLoading(false));
-  }, []);
+useEffect(() => {
+  // Load stats and leads immediately
+  Promise.all([
+    api.get("/dashboard/stats"),
+    api.get("/leads"),
+  ]).then(([statsRes, leadsRes]) => {
+    setStats(statsRes.data);
+    setLeads(leadsRes.data.slice(0, 5));
+  }).finally(() => setLoading(false));
 
+  // Load daily leads separately 
+  api.get("/lead-finder/daily")
+    .then((dailyRes) => {
+      if (dailyRes.data.incomplete) {
+        SetProfileIncomplete(true);
+      } else if (dailyRes.data.success) {
+        setDailyLeads(dailyRes.data.leads);
+      } else {
+        setLeadError(dailyRes.data.message || "Could not load leads.");
+      }
+    })
+    .finally(() => setLeadsLoading(false));
+}, []);
 
   // Dashboard cards
   const statCards = [
@@ -78,51 +96,36 @@ export default function Dashboard() {
   // Use idea button events
   const navigate = useNavigate();
 
-  const handleUseIdea = async (lead) => {
-    navigate('/leads/add', {
-      state: {
-        ideaTitle: lead.title,
-        ideaNote: lead.note,
-        skill,
-        niche
-      }
-    })
-};
+  // Lead Finder state
+  // const [skill, setSkill] = useState(""); // Selected skill
+  // const [niche, setNiche] = useState(""); // Selected niche
+  // const [suggestedLeads, setSuggestedLeads] = useState([]); // Placeholder suggestions
+  // const [loadingSuggestions, setLoadingSuggestions] = useState(false);
 
-// Lead Finder state
-const [skill, setSkill] = useState(''); // Selected skill
-const [niche, setNiche] = useState(''); // Selected niche
-const [suggestedLeads, setSuggestedLeads] = useState([]); // Placeholder suggestions
-const [loadingSuggestions, setLoadingSuggestions] = useState(false)
+  // suggest leads
+  // const handleFindLeads = async () => {
+  //   if (!skill || !niche) {
+  //     alert("Please select both skill and niche");
+  //     return;
+  //   }
 
+  //   try {
+  //     setLoadingSuggestions(true);
 
-// suggest leads
-const handleFindLeads = async () => {
-  if (!skill || !niche) {
-    alert("Please select both skill and niche");
-    return;
-  }
+  //     const res = await api.post("/lead-finder/find", { skill, niche });
 
-  try {
-    setLoadingSuggestions(true);
-
-    const res = await api.post("/lead-finder/find", { skill, niche });
-
-    if (res.data.success) {
-      setSuggestedLeads(res.data.leads);
-    } else {
-      alert("Failed to fetch leads: " + res.data.message);
-    }
-  } catch (err) {
-    console.error("Error fetching suggested leads:", err);
-    alert("Something went wrong while fetching leads.");
-  } finally {
-    setLoadingSuggestions(false);
-  }
-};
-
-
-
+  //     if (res.data.success) {
+  //       setSuggestedLeads(res.data.leads);
+  //     } else {
+  //       alert("Failed to fetch leads: " + res.data.message);
+  //     }
+  //   } catch (err) {
+  //     console.error("Error fetching suggested leads:", err);
+  //     alert("Something went wrong while fetching leads.");
+  //   } finally {
+  //     setLoadingSuggestions(false);
+  //   }
+  // };
 
   return (
     <DashboardLayout>
@@ -130,7 +133,7 @@ const handleFindLeads = async () => {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-black text-[#E0E0E0]">
-            Hello, {user?.name?.split(' ')[0]} 👋
+            Hello, {user?.name?.split(" ")[0]} 👋
           </h1>
           <p className="text-[#A0A0A0] mt-1 lg:text-lg text-s">
             Here's what's happening with your outreach.
@@ -147,7 +150,10 @@ const handleFindLeads = async () => {
       {/* Stat Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {statCards.map(({ label, value, icon: Icon, color }) => (
-          <div key={label} className="card p-5 bg-[#1E1E1E] cursor-pointer border-gray-800">
+          <div
+            key={label}
+            className="card p-5 bg-[#1E1E1E] cursor-pointer border-gray-800"
+          >
             <div
               className={`w-11 h-11 rounded-xl ${color} flex items-center justify-center mb-3`}
             >
@@ -165,69 +171,77 @@ const handleFindLeads = async () => {
         ))}
       </div>
 
-      {/* Lead Finder Card */}
+      {/* Daily Leads cards */}
       <div className="card p-6 mb-8 bg-[#1E1E1E] border-gray-800">
-        <h2 className="font-bold text-[#E0E0E0] mb-2">Find Leads</h2>
-        <p className="text-sm text-[#A0A0A0] border-gray-800 mb-4">
-          Select a skill and niche to see potential lead opportunities.
+        <h2 className="font-bold text-[#e0e0e0] mb-1">Today's Leads</h2>
+        <p className="text-sm text-[#A0A0A0] mb-4">
+          5 fresh leads generated daily based on your profile.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-          <select
-            required
-            className="input-field w-full bg-[#121212] text-[#E0E0E0] border-gray-800"
-            value={skill}
-            onChange={(e) => setSkill(e.target.value)}
-          >
-            <option value="">Select Skill</option>
-            <option value="web_dev">Web Developer</option>
-            <option value="graphic_design">Graphic Designer</option>
-            <option value="digital_marketing">Digital Marketing</option>
-          </select>
-
-          <select
-            required
-            className="input-field w-full bg-[#121212] text-[#E0E0E0] border-gray-800"
-            value={niche}
-            onChange={(e) => setNiche(e.target.value)}
-          >
-            <option value="">Select Niche</option>
-            <option value="restaurants">Restaurants</option>
-            <option value="instagram_vendors">Instagram Vendors</option>
-            <option value="small_business">Small Businesses</option>
-          </select>
-
-          <button onClick={handleFindLeads} type="submit" disabled={loadingSuggestions} className="btn-primary w-full">
-              {loadingSuggestions ? 'Finding leads...' : 'Find lead'}
-            </button>
-        </div>
-
-        {/* Suggestions */}
-        {suggestedLeads.length > 0 && (
-          <div className="mt-4">
-            <p className="text-sm font-medium text-[#e0e0e0] mb-2">
-              Suggestions:
+        {profileIncomplete ? (
+          <div className="text-center py-8">
+            <p className="text-[#e0e0e0] text-sm mb-6">
+              Complete your profile to get daily leads.
             </p>
-            <ul className="space-y-2">
-              {suggestedLeads.map((lead, idx) => (
-                <li
-                  key={idx}
-                  className="p-3 bg-[#121212] rounded-xl flex items-start flex-col gap-5"
-                >
-                  <div className="space-y-1">
-                    <p className="font-semibold text-[#e0e0e0]">{lead.title}</p>
-                    <p className="text-xs text-[#a0a0a0]">{lead.note}</p>
-                  </div>
-                  <button
-                    onClick={() => handleUseIdea(lead)}
-                    className="btn-primary text-xs px-5 lg:py-2 py-1 rounded-xl"
-                  >
-                    Use Idea
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <Link to="/settings" className="btn-primary text-sm">
+              Update Profile →
+            </Link>
           </div>
+        ) : leadError ? (
+          <div className="text-center py-8">
+            <p className="text-[#A0A0A0] text-sm mb-3">{leadError}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="btn-primary text-sm"
+            >
+              Try Again
+            </button>
+          </div>
+        ) : leadsLoading ? (
+          <div className="space-y-3">
+            {[...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                className="h-16 bg-[#121212] rounded-xl animate-pulse"
+              />
+            ))}
+          </div>
+        ) : (
+          <ul className="space-y-2">
+            {dailyLeads.map((lead, idx) => (
+              <li
+                key={idx}
+                className="p-3 bg-[#121212] rounded-xl flex items-start flex-col gap-3"
+              >
+                <div className="space-y-1">
+                  <p className="font-semibold text-[#e0e0e0] mb-2">{lead.title}</p>
+                  <p className="text-sm text-[#e0e0e0] mb-8">{lead.address}</p>
+                  <p className="text-sm text-[#e0e0e0]">{lead.website}</p>
+                  <p className="text-sm text-[#e0e0e0]">{lead.email}</p>
+                  <p className="text-sm text-[#e0e0e0]">{lead.socialHandle}</p>
+                  <p className="text-sm text-[#e0e0e0]">{lead.industry}</p>
+                  <p className="text-sm text-[#e0e0e0]">{lead.note}</p>
+                </div>
+                <button
+                  onClick={() =>
+                    navigate("/leads/add", {
+                      state: {
+                        ideaTitle: lead.title,
+                        ideaNote: lead.note,
+                        ideaWebsite: lead.website,
+                        ideaEmailAddress: lead.email,
+                        ideaSocialHandle: lead.socialHandle,
+                        ideaIndustry: lead.industry,
+                      },
+                    })
+                  }
+                  className="btn-primary text-xs px-5 py-2 rounded-xl"
+                >
+                  Use Idea
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
 
@@ -290,7 +304,9 @@ const handleFindLeads = async () => {
                             ? "badge-high"
                             : lead.opportunityScore === "medium"
                               ? "badge-medium"
-                              : "badge-low"
+                              : lead.opportunityScore === "low"
+                               ?  "badge-low"
+                               : "Analyze"
                         }
                       >
                         {lead.opportunityScore}
