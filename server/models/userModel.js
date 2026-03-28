@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: ""
     },
+    seenLeads: { type: [String], default: [] },
     dailyLeads: { type: Array, default: [] },
   },
   { timestamps: true },
