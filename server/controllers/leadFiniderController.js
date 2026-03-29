@@ -60,6 +60,7 @@ Ensure the output is parseable JSON.
   }
 };
 
+// Auto generate leads for users
 const autoLeadGen = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id);
@@ -97,11 +98,10 @@ const autoLeadGen = async (req, res) => {
 
     const { lat, lon } = geoData[0];
 
-    // Step 2 — Rotate radius daily for geographic variety
+    // Step 2 — Rotate radius and category daily for variety
     const radii = [2000, 3000, 5000, 7000, 10000];
     const radius = radii[new Date().getDate() % radii.length];
 
-    // Rotate business category daily
     const categories = [
       `node["name"]["shop"]`,
       `node["name"]["amenity"="restaurant"]`,
@@ -118,7 +118,7 @@ const autoLeadGen = async (req, res) => {
         node["name"]["shop"](around:${radius},${lat},${lon});
         node["name"]["office"](around:${radius},${lat},${lon});
       );
-      out 15;
+      out 30;
     `;
 
     let rawBusinesses;
@@ -136,16 +136,28 @@ const autoLeadGen = async (req, res) => {
       return res.json({ success: false, message: "Business search timed out. Please try again in a moment." });
     }
 
-    // Step 3 — Filter out previously seen businesses
+    if (!rawBusinesses.length) {
+      return res.json({ success: false, message: "No businesses found in your area." });
+    }
+
+    // Step 3 — Shuffle for randomness, filter seen businesses
     const seenLeads = user.seenLeads || [];
-    const freshBusinesses = rawBusinesses
-      .filter(b => b.tags?.name && !seenLeads.includes(b.tags.name))
+
+    const shuffled = rawBusinesses
+      .filter(b => b.tags?.name)
+      .sort(() => Math.random() - 0.5); // ← random order each call
+
+    let freshBusinesses = shuffled
+      .filter(b => !seenLeads.includes(b.tags.name))
       .slice(0, 5);
 
-    // Fallback — if all businesses have been seen, reset and use all
-    const businesses = freshBusinesses.length > 0
-      ? freshBusinesses
-      : rawBusinesses.slice(0, 5);
+    // If all businesses have been seen — reset seenLeads and start fresh
+    if (freshBusinesses.length === 0) {
+      user.seenLeads = [];
+      freshBusinesses = shuffled.slice(0, 5);
+    }
+
+    const businesses = freshBusinesses;
 
     if (!businesses.length) {
       return res.json({ success: false, message: "No businesses found in your area." });
@@ -169,7 +181,7 @@ const autoLeadGen = async (req, res) => {
         },
       ],
       max_tokens: 1000,
-      temperature: 0.5,
+      temperature: 0.7, // ← slightly higher for more varied AI responses
     });
 
     // Step 5 — Safe JSON parsing
@@ -190,7 +202,7 @@ const autoLeadGen = async (req, res) => {
     }
 
     // Step 6 — Update seenLeads, cap at 100, save and return
-    const newSeenLeads = [...seenLeads, ...businesses.map(b => b.tags.name)];
+    const newSeenLeads = [...(user.seenLeads || []), ...businesses.map(b => b.tags.name)];
     user.seenLeads = newSeenLeads.length > 100
       ? newSeenLeads.slice(-100)
       : newSeenLeads;
