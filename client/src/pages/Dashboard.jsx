@@ -215,11 +215,17 @@ useEffect(() => {
               >
                 <div className="space-y-1">
                   <p className="font-semibold text-[#e0e0e0] mb-2">{lead.title}</p>
-                  <p className="text-sm text-[#e0e0e0] mb-8">{lead.address}</p>
-                  <p className="text-sm text-[#e0e0e0] text-accent">{lead.website}</p>
-                  <p className="text-sm text-[#e0e0e0]">{lead.email}</p>
-                  <p className="text-sm text-[#e0e0e0]">{lead.socialHandle}</p>
-                  <p className="text-sm text-[#e0e0e0]">{lead.industry}</p>
+                  {lead.address? <p className="text-accent text-sm">Address</p> : <p></p>}
+                  <p className="text-sm text-[#e0e0e0] mb-2">{lead.address}</p>
+                  {lead.website? <p className="text-accent text-sm">Webiste</p> : <p></p>}
+                  <p className="text-sm text-[#e0e0e0] text-accent mb-2">{lead.website}</p>
+                  {lead.email? <p className="text-accent text-sm">Email</p> : <p></p>}
+                  <p className="text-sm text-[#e0e0e0] mb-2">{lead.email}</p>
+                  {lead.socialHandle? <p className="text-accent text-sm">Social Handle</p> : <p></p>}
+                  <p className="text-sm text-[#e0e0e0] mb-2">{lead.socialHandle}</p>
+                  {lead.industry? <p className="text-accent text-sm">Industry</p> : <p></p>}
+                  <p className="text-sm text-[#e0e0e0] mb-2">{lead.industry}</p>
+                  {lead.note? <p className="text-accent text-sm">Why they need you</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0]">{lead.note}</p>
                 </div>
                 <button

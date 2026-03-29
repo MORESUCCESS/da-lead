@@ -35,7 +35,6 @@ export default function AddLead() {
   };
 
   // prefill add lead form if user alread uses ai to find suggestions
-
   const location = useLocation();
   const idea = location.state;
 
@@ -47,9 +46,9 @@ export default function AddLead() {
         businessName: idea.ideaTitle || '',
         notes: idea.ideaNote || '',
         website: idea.ideaWebsite || '',
-        email: idea.ideaEmailAddress || '',
-        socailHandle: idea.socialHandle || '',
-        industry: idea.industry || '',
+        contactEmail: idea.ideaEmailAddress || '',
+        socailHandle: idea.ideaSocialHandle || '',
+        industry: idea.ideaIndustry || '',
 
       }))
     }
