@@ -244,7 +244,7 @@ useEffect(() => {
                       },
                     })
                   }
-                  className="btn-primary px-5 py-2 rounded-xl lg:w-fit w-full flex gap-3 items-center"
+                  className="btn-primary px-5 py-2 rounded-xl lg:w-fit w-full flex gap-3 items-center justify-center"
                 >
                   Use Idea <ArrowRight/>
                 </button>
