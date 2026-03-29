@@ -213,20 +213,23 @@ useEffect(() => {
                 key={idx}
                 className="p-3 bg-[#121212] rounded-xl flex items-start flex-col gap-3"
               >
-                <div className="space-y-1">
-                  <p className="font-semibold text-[#e0e0e0] mb-2">{lead.title}</p>
-                  {lead.address? <p className="text-accent text-sm">Address</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0] mb-2">{lead.address}</p>
-                  {lead.website? <p className="text-accent text-sm">Webiste</p> : <p></p>}
-                  <a className="text-sm text-[#e0e0e0] mb-2 underline cursor-pointer" href={lead.website} target="_blank">{lead.website}</a>
+                <div className="w-full p-3">
+                  {/* <h1 className="text-[#e0e0e0] py-2 px-5 bg-[#1e1e1e] w-fit rounded-full font-bold">Lead {idx + 1}</h1> */}
+                  <div className="">
+                    <p className="font-semibold text-[#e0e0e0] text-xl mb-2">{lead.title}</p>
+                  {lead.address? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Address</p> : <p></p>}
+                  <p className="text-sm text-[#e0e0e0] mb-3">{lead.address}</p>
+                  {lead.website? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Webiste</p> : <p></p>}
+                  <a className="text-sm text-[#e0e0e0] underline cursor-pointer mb-3" href={lead.website} target="_blank">{lead.website}</a>
                   {lead.email? <p className="text-accent text-sm">Email</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0] mb-2">{lead.email}</p>
-                  {lead.socialHandle? <p className="text-accent text-sm">Social Handle</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0] mb-2">{lead.socialHandle}</p>
-                  {lead.industry? <p className="text-accent text-sm">Industry</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0] mb-2">{lead.industry}</p>
-                  {lead.note? <p className="text-accent text-sm">Why they need you</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0]">{lead.note}</p>
+                  <p className="text-sm text-[#e0e0e0] mb-3">{lead.email}</p>
+                  {lead.socialHandle? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Social Handle</p> : <p></p>}
+                  <p className="text-sm text-[#e0e0e0] mb-3">{lead.socialHandle}</p>
+                  {lead.industry? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Industry</p> : <p></p>}
+                  <p className="text-sm text-[#e0e0e0] mb-3">{lead.industry}</p>
+                  {lead.note? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Why they need you</p> : <p></p>}
+                  <p className="lg:text-md text-[#e0e0e0]">{lead.note}</p>
+                  </div>
                 </div>
                 <button
                   onClick={() =>
@@ -241,9 +244,9 @@ useEffect(() => {
                       },
                     })
                   }
-                  className="btn-primary text-xs px-5 py-2 rounded-xl"
+                  className="btn-primary px-5 py-2 rounded-xl lg:w-fit w-full flex gap-3 items-center"
                 >
-                  Use Idea
+                  Use Idea <ArrowRight/>
                 </button>
               </li>
             ))}
