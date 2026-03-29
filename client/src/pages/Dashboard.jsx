@@ -218,7 +218,7 @@ useEffect(() => {
                   {lead.address? <p className="text-accent text-sm">Address</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-2">{lead.address}</p>
                   {lead.website? <p className="text-accent text-sm">Webiste</p> : <p></p>}
-                  <a className="text-sm text-[#e0e0e0] mb-2 text-underline" href={lead.website} target="_blank">{lead.website}</a>
+                  <a className="text-sm text-[#e0e0e0] mb-2 underline cursor-pointer" href={lead.website} target="_blank">{lead.website}</a>
                   {lead.email? <p className="text-accent text-sm">Email</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-2">{lead.email}</p>
                   {lead.socialHandle? <p className="text-accent text-sm">Social Handle</p> : <p></p>}
