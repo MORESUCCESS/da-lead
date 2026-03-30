@@ -175,7 +175,7 @@ useEffect(() => {
       <div className="card p-6 mb-8 bg-[#1E1E1E] border-gray-800">
         <h2 className="font-bold text-[#e0e0e0] mb-1">Today's Leads</h2>
         <p className="text-sm text-[#A0A0A0] mb-4">
-          5 fresh leads generated daily based on your profile.
+          Fresh leads generated daily based on your profile.
         </p>
 
         {profileIncomplete ? (
