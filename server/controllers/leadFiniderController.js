@@ -111,11 +111,13 @@ const autoLeadGen = async (req, res) => {
     ];
     const category = categories[new Date().getDate() % categories.length];
 
+    // Always include amenity broadly + daily category for maximum results
     const overpassQuery = `
       [out:json][timeout:25];
       (
         ${category}(around:${radius},${lat},${lon});
         node["name"]["shop"](around:${radius},${lat},${lon});
+        node["name"]["amenity"](around:${radius},${lat},${lon});
         node["name"]["office"](around:${radius},${lat},${lon});
       );
       out 30;
@@ -136,7 +138,33 @@ const autoLeadGen = async (req, res) => {
       return res.json({ success: false, message: "Business search timed out. Please try again in a moment." });
     }
 
-    if (!rawBusinesses.length) {
+    // Fallback — retry with 15km radius if first query returns nothing
+    if (!rawBusinesses || rawBusinesses.length === 0) {
+      try {
+        const fallbackQuery = `
+          [out:json][timeout:25];
+          (
+            node["name"]["shop"](around:15000,${lat},${lon});
+            node["name"]["amenity"](around:15000,${lat},${lon});
+            node["name"]["office"](around:15000,${lat},${lon});
+          );
+          out 30;
+        `;
+        const fallbackRes = await axios.post(
+          "https://overpass-api.de/api/interpreter",
+          `data=${encodeURIComponent(fallbackQuery)}`,
+          {
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            timeout: 15000,
+          }
+        );
+        rawBusinesses = fallbackRes.data.elements;
+      } catch {
+        return res.json({ success: false, message: "Business search timed out. Please try again." });
+      }
+    }
+
+    if (!rawBusinesses || rawBusinesses.length === 0) {
       return res.json({ success: false, message: "No businesses found in your area." });
     }
 
@@ -145,7 +173,7 @@ const autoLeadGen = async (req, res) => {
 
     const shuffled = rawBusinesses
       .filter(b => b.tags?.name)
-      .sort(() => Math.random() - 0.5); // ← random order each call
+      .sort(() => Math.random() - 0.5);
 
     let freshBusinesses = shuffled
       .filter(b => !seenLeads.includes(b.tags.name))
@@ -181,7 +209,7 @@ const autoLeadGen = async (req, res) => {
         },
       ],
       max_tokens: 1000,
-      temperature: 0.7, // ← slightly higher for more varied AI responses
+      temperature: 0.7,
     });
 
     // Step 5 — Safe JSON parsing
