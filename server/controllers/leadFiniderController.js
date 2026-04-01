@@ -60,7 +60,6 @@ Ensure the output is parseable JSON.
   }
 };
 
-// Auto generate leads for users
 const autoLeadGen = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id);
@@ -111,7 +110,6 @@ const autoLeadGen = async (req, res) => {
     ];
     const category = categories[new Date().getDate() % categories.length];
 
-    // Always include amenity broadly + daily category for maximum results
     const overpassQuery = `
       [out:json][timeout:25];
       (
@@ -138,7 +136,7 @@ const autoLeadGen = async (req, res) => {
       return res.json({ success: false, message: "Business search timed out. Please try again in a moment." });
     }
 
-    // Fallback — retry with 15km radius if first query returns nothing
+    // Fallback — retry with 15km if first query returns nothing
     if (!rawBusinesses || rawBusinesses.length === 0) {
       try {
         const fallbackQuery = `
@@ -168,7 +166,7 @@ const autoLeadGen = async (req, res) => {
       return res.json({ success: false, message: "No businesses found in your area." });
     }
 
-    // Step 3 — Shuffle for randomness, filter seen businesses
+    // Step 3 — Shuffle, filter seen, widen until we have 5
     const seenLeads = user.seenLeads || [];
 
     const shuffled = rawBusinesses
@@ -179,13 +177,62 @@ const autoLeadGen = async (req, res) => {
       .filter(b => !seenLeads.includes(b.tags.name))
       .slice(0, 5);
 
-    // If all businesses have been seen — reset seenLeads and start fresh
-    if (freshBusinesses.length === 0) {
-      user.seenLeads = [];
-      freshBusinesses = shuffled.slice(0, 5);
+    // Widen search radius progressively until we have 5 fresh businesses
+    if (freshBusinesses.length < 5) {
+      const widerRadii = [15000, 20000, 30000];
+
+      for (const widerRadius of widerRadii) {
+        if (freshBusinesses.length >= 5) break;
+
+        try {
+          const widerQuery = `
+            [out:json][timeout:25];
+            (
+              node["name"]["shop"](around:${widerRadius},${lat},${lon});
+              node["name"]["amenity"](around:${widerRadius},${lat},${lon});
+              node["name"]["office"](around:${widerRadius},${lat},${lon});
+            );
+            out 30;
+          `;
+          const widerRes = await axios.post(
+            "https://overpass-api.de/api/interpreter",
+            `data=${encodeURIComponent(widerQuery)}`,
+            {
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              timeout: 15000,
+            }
+          );
+
+          const widerShuffled = widerRes.data.elements
+            .filter(b => b.tags?.name)
+            .sort(() => Math.random() - 0.5);
+
+          const currentTitles = freshBusinesses.map(b => b.tags.name);
+          const additionalFresh = widerShuffled.filter(b =>
+            !seenLeads.includes(b.tags.name) &&
+            !currentTitles.includes(b.tags.name)
+          );
+
+          freshBusinesses = [...freshBusinesses, ...additionalFresh].slice(0, 5);
+
+        } catch {
+          continue;
+        }
+      }
     }
 
-    const businesses = freshBusinesses;
+    // Last resort — reset seenLeads and fill up to 5 from original pool
+    if (freshBusinesses.length < 5) {
+      user.seenLeads = [];
+      const currentTitles = freshBusinesses.map(b => b.tags.name);
+      const fillUp = shuffled
+        .filter(b => !currentTitles.includes(b.tags.name))
+        .slice(0, 5 - freshBusinesses.length);
+
+      freshBusinesses = [...freshBusinesses, ...fillUp];
+    }
+
+    const businesses = freshBusinesses.slice(0, 5);
 
     if (!businesses.length) {
       return res.json({ success: false, message: "No businesses found in your area." });
@@ -205,10 +252,10 @@ const autoLeadGen = async (req, res) => {
         },
         {
           role: "user",
-          content: `Here are today's real local businesses:\n${businessList}\n\nGenerate outreach notes for each. Return ONLY the JSON array.`,
+          content: `Here are exactly ${businesses.length} real local businesses:\n${businessList}\n\nGenerate outreach notes for each one. Return ONLY the JSON array with exactly ${businesses.length} items.`,
         },
       ],
-      max_tokens: 1000,
+      max_tokens: 1500,
       temperature: 0.7,
     });
 
@@ -246,7 +293,6 @@ const autoLeadGen = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message || "Failed to generate leads" });
   }
 };
-
 module.exports = {
   generateSuggestedLeads,
   autoLeadGen,
