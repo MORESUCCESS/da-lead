@@ -201,7 +201,7 @@ export default function Settings() {
               <button
                 type="submit"
                 disabled={saving || loading}
-                className="btn-primary"
+                className="btn-primary bg-[#522398]"
               >
                 {saving ? "Saving..." : "Save Changes"}
               </button>

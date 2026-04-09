@@ -142,7 +142,7 @@ export default function LeadDetail() {
         <div className="relative flex items-center justify-between mb-5">
           <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-100 z-0" />
           <div
-            className="absolute top-4 left-0 h-0.5 bg-primary z-0 transition-all duration-500"
+            className="absolute top-4 left-0 h-0.5 bg-[#522398] z-0 transition-all duration-500"
             style={{
               width: `${(currentStep / (statusSteps.length - 1)) * 100}%`,
             }}
@@ -156,7 +156,7 @@ export default function LeadDetail() {
             >
               <div
                 className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-200
-                ${i <= currentStep ? "bg-primary border-primary" : "bg-white border-gray-200 group-hover:border-primary/40"}`}
+                ${i <= currentStep ? "bg-[#522398] border-primary" : "bg-white border-gray-200 group-hover:border-primary/40"}`}
               >
                 {i < currentStep ? (
                   <CheckCircle size={14} className="text-white" />
@@ -277,7 +277,7 @@ export default function LeadDetail() {
             <div className="space-y-2">
               <Link
                 to={`/leads/${id}/analyze`}
-                className="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-primary text-[#e0e0e0] font-semibold text-sm hover:bg-[#121212] transition-colors"
+                className="flex items-center gap-3 w-full px-4 py-3 rounded-xl bg-[#522398] text-[#e0e0e0] font-semibold text-sm hover:bg-[#121212] transition-colors"
               >
                 <Zap size={16} /> Run AI Analysis
               </Link>

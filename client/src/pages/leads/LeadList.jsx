@@ -44,7 +44,7 @@ export default function LeadList() {
           <h1 className="text-2xl font-black text-[#e0e0e0]">Leads Pipeline</h1>
           <p className="text-[#a0a0a0] mt-1">Manage and track your outreach opportunities.</p>
         </div>
-        <Link to="/leads/add" className="btn-primary text-sm flex items-center gap-2">
+        <Link to="/leads/add" className="btn-primary bg-[#522398] text-sm flex items-center gap-2">
           <Plus size={16} /> <span className='lg:flex hidden'>Add Lead</span>
         </Link>
       </div>

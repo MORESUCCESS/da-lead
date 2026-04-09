@@ -126,7 +126,7 @@ export default function LeadMessage() {
             <button
               onClick={generate}
               disabled={loading}
-              className="btn-primary w-full flex items-center justify-center gap-2"
+              className="btn-primary bg-[#522398] w-full flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -182,7 +182,7 @@ export default function LeadMessage() {
                   <button onClick={() => save(true)} disabled={saving} className="btn-secondary text-sm !py-2.5 !px-4 flex items-center gap-1.5">
                     <Save size={15} /> Save Draft
                   </button>
-                  <button onClick={() => save(false)} disabled={saving} className="btn-primary text-sm !py-2.5 !px-4 flex items-center gap-1.5">
+                  <button onClick={() => save(false)} disabled={saving} className="btn-primary bg-[#522398] text-sm !py-2.5 !px-4 flex items-center gap-1.5">
                     <Send size={15} /> Mark as Sent
                   </button>
                 </div>

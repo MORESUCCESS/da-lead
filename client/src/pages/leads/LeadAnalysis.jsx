@@ -75,7 +75,7 @@ export default function LeadAnalysis() {
             <button
               onClick={runAnalysis}
               disabled={loading}
-              className="btn-primary mx-auto"
+              className="btn-primary mx-auto bg-[#522398]"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -136,7 +136,7 @@ export default function LeadAnalysis() {
 
             {/* Actions */}
             <div className="flex gap-3 lg:flex-row flex-col">
-              <button onClick={acceptAnalysis} className="btn-primary flex items-center gap-2">
+              <button onClick={acceptAnalysis} className="btn-primary bg-[#522398] flex items-center gap-2">
                 <CheckCircle size={16} /> Accept & Save
               </button>
               <button onClick={runAnalysis} disabled={loading} className="btn-secondary flex items-center gap-2">
