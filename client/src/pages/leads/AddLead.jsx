@@ -160,7 +160,7 @@ export default function AddLead() {
           </div>
 
           <div className="flex gap-3">
-            <button type="submit" disabled={loading} className="btn-primary">
+            <button type="submit" disabled={loading} className="btn-primary bg-[#522398]">
               {loading ? 'Saving...' : 'Save Lead'}
             </button>
             <Link to="/leads" className="btn-secondary">

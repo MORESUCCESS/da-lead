@@ -148,7 +148,7 @@ export default function Signup() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full"
+              className="btn-primary w-full bg-[#522398]"
             >
               {loading ? "Creating account..." : "Create Account"}
             </button>
@@ -169,7 +169,7 @@ export default function Signup() {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-primary font-semibold hover:underline"
+              className="text-[#522398] font-semibold hover:underline"
             >
               Sign in
             </Link>

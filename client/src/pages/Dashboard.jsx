@@ -141,9 +141,9 @@ useEffect(() => {
         </div>
         <Link
           to="/leads/add"
-          className="btn-primary text-sm flex items-center gap-2"
+          className="btn-primary bg-[#522398] text-sm flex items-center gap-2"
         >
-          <Plus size={16} /> <p className="lg:flex hidden">Add New Lead</p>
+          <Plus size={16}/> <p className="lg:flex hidden ">Add New Lead</p>
         </Link>
       </div>
 
@@ -183,7 +183,7 @@ useEffect(() => {
             <p className="text-[#e0e0e0] text-sm mb-6">
               Complete your profile to get daily leads.
             </p>
-            <Link to="/settings" className="btn-primary text-sm">
+            <Link to="/settings" className="btn-primary bg-[#522398] text-sm">
               Update Profile →
             </Link>
           </div>
@@ -192,7 +192,7 @@ useEffect(() => {
             <p className="text-[#A0A0A0] text-sm mb-3">{leadError}</p>
             <button
               onClick={() => window.location.reload()}
-              className="btn-primary text-sm"
+              className="btn-primary bg-[#522398] text-sm"
             >
               Try Again
             </button>
@@ -244,9 +244,9 @@ useEffect(() => {
                       },
                     })
                   }
-                  className="btn-primary px-5 py-2 rounded-xl lg:w-fit w-full flex gap-3 items-center justify-center"
+                  className="btn-primary  bg-[#522398] px-5 py-2 rounded-xl lg:w-fit w-full flex gap-3 items-center justify-center"
                 >
-                  Add lead <ArrowRight/>
+                  Add lead <ArrowRight size={15}/>
                 </button>
               </li>
             ))}

@@ -70,11 +70,11 @@ export default function DashboardLayout({ children }) {
         {/* User & Logout */}
         <div className="px-3 pb-4 border-t border-gray-800 pt-3 space-y-1">
           <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#522398] flex items-center justify-center text-white text-xs font-bold shrink-0">
               {initials}
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-[#E0E0E0] truncate">{user?.name}</p>
+              <p className="text-sm font-semibold text-[#522398] truncate">{user?.name}</p>
               <p className="text-xs text-[#A0A0A0] truncate">{user?.email}</p>
             </div>
           </div>

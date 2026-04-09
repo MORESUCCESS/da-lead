@@ -34,7 +34,7 @@ export default function Login() {
       <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-12 bg-[#121212]">
         <div className="max-w-md w-full mx-auto">
           <Link to="/" className="flex items-center gap-2 mb-10">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#522398] to-accent flex items-center justify-center">
               <Target size={16} className="text-white" />
             </div>
             <span className="font-bold text-xl text-[#e0e0e0]">Da-Lead</span>
@@ -66,7 +66,7 @@ export default function Login() {
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="text-sm font-semibold text-[#e0e0e0]">Password</label>
-                <button type="button" className="text-sm text-primary font-medium hover:underline">
+                <button type="button" className="text-sm text-[#522398] font-medium hover:underline">
                   Forgot password?
                 </button>
               </div>
@@ -89,7 +89,7 @@ export default function Login() {
                 </button>
               </div>
             </div>
-            <button type="submit" disabled={loading} className="btn-primary w-full">
+            <button type="submit" disabled={loading} className="btn-primary w-full bg-[#522398]">
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
@@ -106,7 +106,7 @@ export default function Login() {
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-primary font-semibold hover:underline">
+            <Link to="/signup" className="text-[#522398] font-semibold hover:underline">
               Sign up for free
             </Link>
           </p>
