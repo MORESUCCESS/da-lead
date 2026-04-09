@@ -107,7 +107,7 @@ export default function Landing() {
           <div className="flex items-center">
             <Link
               to="/signup"
-              className="lg:flex hidden btn-primary bg-primary rounded-full text-sm !py-2.5 !px-5"
+              className="lg:flex hidden btn-primary bg-[#522398] rounded-full text-sm !py-2.5 !px-5"
             >
               Get Started
             </Link>
@@ -146,7 +146,7 @@ export default function Landing() {
             <li>
               <Link
                 to="/signup"
-                className="btn-primary bg-primary rounded-full text-sm !py-2.5 !px-5"
+                className="btn-primary bg-[#522398] rounded-full text-sm !py-2.5 !px-5"
               >
                 Get Started
               </Link>
@@ -159,9 +159,9 @@ export default function Landing() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="min-h-screen relative pt-20 pb-28 overflow-hidden bg-[#121212] items-center justify-center text-center">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/40 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
-          <div className="absolute bottom-20 left-0 w-64 h-64 bg-primary/50 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
+        <section className="min-h-screen relative pt-20 pb-28 overflow-hidden bg-[#0000] items-center justify-center text-center">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
+          <div className="absolute bottom-20 left-0 w-64 h-64 bg-primary/10 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative lg:py-12 py-[85px]">
             <div className="flex items-center w-full justify-center">
@@ -174,7 +174,7 @@ export default function Landing() {
                   Find leads, send {" "}
                   <br className="lg:flex hidden" />
                   smarter ptiches,{" "}
-                  <span className="text-primary">and close</span>{" "}
+                  <span className="text-[#522398]">and close</span>{" "}
                   <span className="text-accent">deals.</span>
                 </h1>
                 <p data-aos="fade-in" className="lg:text-lg text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto">
@@ -183,7 +183,7 @@ export default function Landing() {
                   pitches that actually convert.
                 </p>
                 <div className="flex w-full items-center justify-center">
-                  <Link to="/signup" data-aos="zoom-in" className="btn-primary rounded-full text-center px-10 bg-primary">
+                  <Link to="/signup" data-aos="zoom-in" className="btn-primary rounded-full text-center px-10 bg-[#522398]">
                     Start Now <ArrowRight size={16} className="inline ml-1" />
                   </Link>
                 </div>
@@ -194,7 +194,7 @@ export default function Landing() {
 
         {/* Pain Points */}
         <section className="relative overflow-hidden py-20 bg-[#121212]">
-          <div className="absolute top-[-40%] left-0 w-64 h-64 bg-primary/50 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
+          <div className="absolute top-[-40%] left-0 w-64 h-64 bg-primary/10 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <h2 data-aos="fade-up" className="text-3xl text-[#E0E0E0] sm:text-4xl font-black text-white mb-4">
               Sound familiar?
@@ -317,7 +317,7 @@ export default function Landing() {
                 placeholder="Enter your email"
                 className="flex-1 px-5 py-3.5 rounded-full bg-[#2A2A2A] border border-black/20 text-[#E0E0E0] placeholder-[#E0E0E0] focus:outline-none focus:ring-1 focus:ring-white/10 border-gray-800"
               />
-              <Link to="/signup" className="btn-primary bg-primary rounded-full px-8 whitespace-nowrap">
+              <Link to="/signup" className="btn-primary bg-[#522398] rounded-full px-8 whitespace-nowrap">
                 Get Started
               </Link>
             </div>
