@@ -57,6 +57,7 @@ export default function Settings() {
   const [saving, setSaving] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [avatarUploading, setAvatarUploading] = useState(false);
 
   useEffect(() => {
     api
@@ -93,6 +94,27 @@ export default function Settings() {
   const plan = profile?.plan || "free";
   const planInfo = plans[plan] || plans.free;
 
+  // handle avatar change
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    setAvatarUploading(true);
+    try {
+      const res = await api.post("/users/avatar", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setProfile((prev) => ({ ...prev, avatar: res.data.avatar }));
+    } catch {
+      setError("Failed to upload avatar");
+    } finally {
+      setAvatarUploading(false);
+    }
+  };
+
   return (
     <DashboardLayout>
       <div className="mb-8">
@@ -104,7 +126,7 @@ export default function Settings() {
 
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Profile Form */}
-        <form onSubmit={handleSave} className="lg:col-span-2 space-y-5">
+        <form onSubmit={handleSave} className="lg:col-span-2 space-y-5 order-2">
           {success && (
             <div className="flex items-center gap-2.5 bg-green-50 border border-green-200 text-green-700 text-sm font-medium px-4 py-3 rounded-xl">
               <CheckCircle size={16} /> Profile updated successfully!
@@ -201,7 +223,7 @@ export default function Settings() {
               <button
                 type="submit"
                 disabled={saving || loading}
-                className="btn-primary bg-[#522398]"
+                className="btn-primary bg-[#522398] text-sm"
               >
                 {saving ? "Saving..." : "Save Changes"}
               </button>
@@ -210,9 +232,47 @@ export default function Settings() {
         </form>
 
         {/* Right: Plan + Prefs */}
-        <div className="space-y-5 hidden">
+        <div className="space-y-5">
+          {/* Profile Picture */}
+          <div className="order-1 relative card p-5 bg-[#1e1e1e] border-1 border-gray-800 overflow-hidden w-full">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#522386] to-[#522386]/40 w-full h-[50%] z-0"></div>
+
+            {/* Display user profile picture */}
+            <div className="flex flex-col items-center gap-4">
+              <div className="relative">
+                <img
+                  src={
+                    profile?.avatar ||
+                    `https://ui-avatars.com/api/?name=${encodeURIComponent(profile?.name || "U")}&background=522398&color=fff`
+                  }
+                  alt="Avatar"
+                  className="rounded-full object-cover mt-5"
+                />
+                {avatarUploading && (
+                  <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs">...</span>
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-col items-center">
+                <label className="btn-primary bg-[#522398] text-xs px-4 py-2 cursor-pointer">
+                  {avatarUploading ? "Uploading..." : "Change Photo"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarChange}
+                    className="hidden"
+                  />
+                </label>
+                <p className="text-xs text-[#a0a0a0] mt-4">
+                  JPG, PNG or WebP. Max 5MB.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Subscription */}
-          <div className="card p-5">
+          <div className="card p-5 hidden">
             <div className="flex items-center gap-2 mb-4">
               <Crown size={16} className="text-amber-500" />
               <h3 className="font-bold text-gray-900">Subscription Plan</h3>
@@ -241,7 +301,7 @@ export default function Settings() {
           </div>
 
           {/* Preferences */}
-          <div className="card p-5">
+          <div className="card p-5 hidden">
             <div className="flex items-center gap-2 mb-4">
               <Bell size={16} className="text-gray-500" />
               <h3 className="font-bold text-gray-900">Preferences</h3>
@@ -279,7 +339,7 @@ export default function Settings() {
           </div>
 
           {/* Danger Zone */}
-          <div className="card p-5 border-red-100">
+          <div className="card p-5 border-red-100 hidden">
             <div className="flex items-center gap-2 mb-3">
               <Shield size={16} className="text-red-500" />
               <h3 className="font-bold text-gray-900">Danger Zone</h3>

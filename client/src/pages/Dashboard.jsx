@@ -215,19 +215,19 @@ useEffect(() => {
               >
                 <div className="w-full p-3">
                   {/* <h1 className="text-[#e0e0e0] py-2 px-5 bg-[#1e1e1e] w-fit rounded-full font-bold">Lead {idx + 1}</h1> */}
-                  <div className="">
+                  <div>
                     <p className="font-semibold text-[#e0e0e0] text-xl mb-2">{lead.title}</p>
-                  {lead.address? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Address</p> : <p></p>}
+                  {lead.address? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Address</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.address}</p>
-                  {lead.website? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Webiste</p> : <p></p>}
+                  {lead.website? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Webiste</p> : <p></p>}
                   <a className="text-sm text-[#e0e0e0] underline cursor-pointer mb-3" href={lead.website} target="_blank">{lead.website}</a>
-                  {lead.email? <p className="text-accent text-sm">Email</p> : <p></p>}
+                  {lead.email? <p className="text-[#522386] text-sm">Email</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.email}</p>
-                  {lead.socialHandle? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Social Handle</p> : <p></p>}
+                  {lead.socialHandle? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Social Handle</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.socialHandle}</p>
-                  {lead.industry? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Industry</p> : <p></p>}
+                  {lead.industry? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Industry</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.industry}</p>
-                  {lead.note? <p className="text-accent text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Why they need you</p> : <p></p>}
+                  {lead.note? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Why they need you</p> : <p></p>}
                   <p className="lg:text-md text-[#e0e0e0]">{lead.note}</p>
                   </div>
                 </div>
@@ -244,7 +244,7 @@ useEffect(() => {
                       },
                     })
                   }
-                  className="btn-primary  bg-[#522398] px-5 py-2 rounded-xl lg:w-fit w-full flex gap-3 items-center justify-center"
+                  className="btn-primary text-sm  bg-[#522398] px-5 py-2 rounded-xl lg:w-fit w-full flex gap-3 items-center justify-center"
                 >
                   Add lead <ArrowRight size={15}/>
                 </button>
@@ -337,10 +337,10 @@ useEffect(() => {
         <div className="card p-6 bg-[#1e1e1e]  border-gray-800">
           <h2 className="font-bold text-[#e0e0e0] mb-4">Action Items</h2>
           <div className="space-y-3">
-            <div className="p-4 bg-success/5 border border-success/20 rounded-xl">
+            <div className="p-4 bg-[#522386]/5 border border-[#522386]/20 rounded-xl">
               <div className="flex items-center gap-2 mb-1">
-                <TrendingUp size={15} className="text-success" />
-                <span className="text-sm font-bold text-success">
+                <TrendingUp size={15} className="text-[#522386]" />
+                <span className="text-sm font-bold text-[#522386]">
                   High Opportunity
                 </span>
               </div>
@@ -351,15 +351,15 @@ useEffect(() => {
               </p>
               <Link
                 to="/leads?status=not_contacted"
-                className="text-success text-xs font-semibold hover:underline mt-1.5 inline-block"
+                className="text-[#522386] text-xs font-semibold hover:underline mt-1.5 inline-block"
               >
                 Draft pitches →
               </Link>
             </div>
             <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl">
               <div className="flex items-center gap-2 mb-1">
-                <Clock size={15} className="text-amber-600" />
-                <span className="text-sm font-bold text-amber-700">
+                <Clock size={15} className="text-[#522386]" />
+                <span className="text-sm font-bold text-[#522386]">
                   Needs Follow Up
                 </span>
               </div>
@@ -369,7 +369,7 @@ useEffect(() => {
               </p>
               <Link
                 to="/leads?status=contacted"
-                className="text-amber-600 text-xs font-semibold hover:underline mt-1.5 inline-block"
+                className="text-[#522386] text-xs font-semibold hover:underline mt-1.5 inline-block"
               >
                 Follow up now →
               </Link>

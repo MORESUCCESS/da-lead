@@ -1,5 +1,19 @@
 const userModel = require("../models/userModel");
 
+const profilePicture = async(req, res)=>{
+  try {
+
+    const user = await userModel.findByIdAndUpdate(
+      req.user.id,
+      {avatar: req.file.path},
+      {new: true}
+    );
+    res.json({success: true, avatar: user.avatar});
+  } catch (error) {
+    res.status(500).json({success: false, message: "Upload failed"});
+  }
+}
+
 // fetch user details and display it on settings page
 const UserDetails = async (req, res) => {
   try {
@@ -62,4 +76,7 @@ const UpdateUser = async (req, res) => {
   }
 };
 
-module.exports = { UserDetails, UpdateUser };
+// user profile picture
+
+
+module.exports = { UserDetails, UpdateUser, profilePicture };

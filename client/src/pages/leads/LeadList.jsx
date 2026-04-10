@@ -165,7 +165,7 @@ export default function LeadList() {
                         </Link>
                         <Link
                           to={`/leads/${lead._id}/message`}
-                          className="text-xs font-semibold text-white bg-primary px-3 py-1.5 rounded-lg hover:bg-primary-dark transition-colors flex items-center gap-1"
+                          className="text-xs font-semibold text-white bg-[#522398] px-3 py-1.5 rounded-lg hover:bg-primary-dark transition-colors flex items-center gap-1"
                         >
                           <MessageSquare size={12} /> Pitch
                         </Link>
