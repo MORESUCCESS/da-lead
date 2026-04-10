@@ -48,8 +48,8 @@ const googleAuth = async (req, res) => {
 
     res.status(200).json({ user });
   } catch (error) {
-    console.error("FULL ERROR:", error); // 👈 add this
-    console.error("GOOGLE ERROR:", error.response?.data); // 👈 and this
+    console.error("FULL ERROR:", error); 
+    console.error("GOOGLE ERROR:", error.response?.data); 
 
     res.status(400).json({
       success: false,
