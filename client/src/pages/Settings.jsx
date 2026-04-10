@@ -155,7 +155,7 @@ export default function Settings() {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="Your name"
-                    className="input-field border-gray-800 bg-[#121212] text-[#e0e0e0]"
+                    className="input-field border-gray-800 bg-[#121212] text-[#e0e0e0] text-sm"
                   />
                 </div>
                 <div>
@@ -166,7 +166,7 @@ export default function Settings() {
                     type="email"
                     value={profile?.email || ""}
                     disabled
-                    className="input-field border-gray-800 bg-[#121212] text-[#6A6A6A] cursor-not-allowed"
+                    className="input-field border-gray-800 bg-[#121212] text-[#6A6A6A] cursor-not-allowed text-sm"
                   />
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function Settings() {
                       setForm({ ...form, freelanceCategory: e.target.value })
                     }
                     placeholder="e.g. Web Designer, Copywriter, Social Media Manager"
-                    className="input-field border-gray-800 bg-[#121212] text-[#e0e0e0]"
+                    className="input-field border-gray-800 bg-[#121212] text-[#e0e0e0] text-sm"
                   />
                 </div>
                 <div>
@@ -197,7 +197,7 @@ export default function Settings() {
                       setForm({ ...form, location: e.target.value })
                     }
                     placeholder="e.g. Lagos, London, New York"
-                    className="input-field border-gray-800 bg-[#121212] text-[#e0e0e0]"
+                    className="input-field border-gray-800 bg-[#121212] text-[#e0e0e0] text-sm"
                   />
                 </div>
               </div>
@@ -214,7 +214,7 @@ export default function Settings() {
                   onChange={(e) => setForm({ ...form, bio: e.target.value })}
                   rows={4}
                   placeholder="I am a specialized web developer focusing on React and conversion optimization..."
-                  className="input-field resize-none border-gray-800 bg-[#121212] text-[#e0e0e0]"
+                  className="input-field resize-none border-gray-800 bg-[#121212] text-[#e0e0e0] text-sm"
                 />
               </div>
             </div>
