@@ -228,7 +228,7 @@ useEffect(() => {
                   {lead.industry? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Industry</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.industry}</p>
                   {lead.note? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Why they need you</p> : <p></p>}
-                  <p className="lg:text-md text-[#e0e0e0]">{lead.note}</p>
+                  <p className="lg:text-sm text-[#e0e0e0]">{lead.note}</p>
                   </div>
                 </div>
                 <button
