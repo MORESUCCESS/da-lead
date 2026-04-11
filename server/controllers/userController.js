@@ -42,6 +42,12 @@ const UpdateUser = async (req, res) => {
   }
 
   try {
+    // check is user exists and clear cached coordinates if it exists
+    const existingUser = await userModel.findById(req.user.id);
+
+    const locationChanged = location && location !== existingUser.location;
+
+
     const updatedUser = await userModel.findByIdAndUpdate(
       req.user.id,
       {
@@ -49,9 +55,10 @@ const UpdateUser = async (req, res) => {
         ...(freelanceCategory && { freelanceCategory }),
         ...(bio && { bio }),
         ...(location && {location}),
+        ...(locationChanged && {cachedLat: '', cachedLon: ''})
       },
       {
-        new: true, // return updated user
+        returnDocument: "after", // return updated user
         runValidators: true, // enforce schema rules
       }
     ).select("-password");

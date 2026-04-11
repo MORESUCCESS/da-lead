@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
     freelanceCategory: { type: String, default: "" },
 
     plan: { type: String, enum: ["free", "pro"], default: "free" },
-    
+
     provider: {
       type: String,
       default: "local",
@@ -24,14 +24,17 @@ const userSchema = new mongoose.Schema(
 
     location: {
       type: String,
-      default: ""
+      default: "",
     },
     lastGeneratedDate: {
       type: String,
-      default: ""
+      default: "",
     },
     seenLeads: { type: [String], default: [] },
     dailyLeads: { type: Array, default: [] },
+
+    cachedLat: { type: String, default: "" },
+    cachedLon: { type: String, default: "" },
   },
   { timestamps: true },
 );

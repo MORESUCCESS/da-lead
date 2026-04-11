@@ -38,21 +38,19 @@ export default function AddLead() {
   const location = useLocation();
   const idea = location.state;
 
-  useEffect(()=>{
-    if(idea)
-    {
-      setForm((prev)=>({
-        ...prev, 
-        businessName: idea.ideaTitle || '',
-        notes: idea.ideaNote || '',
-        website: idea.ideaWebsite || '',
-        contactEmail: idea.ideaEmailAddress || '',
-        socailHandle: idea.ideaSocialHandle || '',
-        industry: idea.ideaIndustry || '',
-
-      }))
-    }
-  },[idea])
+useEffect(() => {
+  if (idea) {
+    setForm((prev) => ({
+      ...prev,
+      businessName: idea.ideaTitle || '',
+      notes: idea.ideaNote || '',
+      website: idea.ideaWebsite || '',
+      contactEmail: idea.ideaEmailAddress || '',
+      socialHandle: idea.ideaSocialHandle || '',  
+      industry: idea.ideaIndustry || '',          
+    }))
+  }
+}, [idea])
 
   return (
     <DashboardLayout>
