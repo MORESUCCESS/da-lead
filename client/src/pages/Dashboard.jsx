@@ -215,8 +215,9 @@ useEffect(() => {
               >
                 <div className="w-full p-3">
                   {/* <h1 className="text-[#e0e0e0] py-2 px-5 bg-[#1e1e1e] w-fit rounded-full font-bold">Lead {idx + 1}</h1> */}
-                  <div>
-                    <p className="font-semibold text-[#e0e0e0] text-xl mb-2">{lead.title}</p>
+                  <div className="space-y-2">
+                    <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Business name</p>
+                    <p className="font-semibold text-[#e0e0e0] text-sm mb-2">{lead.title}</p>
                   {lead.address? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Address</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.address}</p>
                   {lead.website? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Webiste</p> : <p></p>}

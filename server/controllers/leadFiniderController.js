@@ -120,14 +120,23 @@ const autoLeadGen = async (req, res) => {
 
     // Step 2 — Single large query, no progressive widening
     const overpassQuery = `
-      [out:json][timeout:30];
-      (
-        node["name"]["shop"](around:10000,${lat},${lon});
-        node["name"]["amenity"](around:10000,${lat},${lon});
-        node["name"]["office"](around:10000,${lat},${lon});
-      );
-      out 50;
-    `;
+  [out:json][timeout:30];
+  (
+    node["name"]["shop"](around:10000,${lat},${lon});
+    node["name"]["office"](around:10000,${lat},${lon});
+    node["name"]["amenity"="restaurant"](around:10000,${lat},${lon});
+    node["name"]["amenity"="cafe"](around:10000,${lat},${lon});
+    node["name"]["amenity"="bar"](around:10000,${lat},${lon});
+    node["name"]["amenity"="fast_food"](around:10000,${lat},${lon});
+    node["name"]["amenity"="beauty"](around:10000,${lat},${lon});
+    node["name"]["amenity"="salon"](around:10000,${lat},${lon});
+    node["name"]["amenity"="gym"](around:10000,${lat},${lon});
+    node["name"]["amenity"="hotel"](around:10000,${lat},${lon});
+    node["name"]["amenity"="clinic"](around:10000,${lat},${lon});
+    node["name"]["amenity"="dentist"](around:10000,${lat},${lon});
+  );
+  out 50;
+`;
 
     let rawBusinesses;
     try {
