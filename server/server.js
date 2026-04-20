@@ -8,6 +8,7 @@ const leadRouter = require('./routes/leadRoutes.js');
 const dashboardRouter = require('./routes/dashboardRoutes.js');
 const leadSuggestionRouter = require('./routes/leadFinderRoutes.js');
 const userRouter = require('./routes/userRoutes.js');
+const cronRouter = require('./routes/cronRoutes.js');
 const app = express();
 // const PORT = process.env.PORT || 3000
 connectToDb();
@@ -37,6 +38,10 @@ app.use('/api', require("./routes/messageRoutes.js"));
 
 // user details
 app.use('/api/users', userRouter);
+
+
+// lead gen Con
+app.use('/api/cron', cronRouter);
 
 
 

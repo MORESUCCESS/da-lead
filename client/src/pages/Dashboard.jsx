@@ -216,19 +216,19 @@ useEffect(() => {
                 <div className="w-full p-3">
                   {/* <h1 className="text-[#e0e0e0] py-2 px-5 bg-[#1e1e1e] w-fit rounded-full font-bold">Lead {idx + 1}</h1> */}
                   <div className="space-y-2">
-                    <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Business name</p>
+                    <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Business name</p>
                     <p className="font-semibold text-[#e0e0e0] text-sm mb-2">{lead.title}</p>
-                  {lead.address? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Address</p> : <p></p>}
+                  {lead.address? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Address</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.address}</p>
-                  {lead.website? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Webiste</p> : <p></p>}
+                  {lead.website? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Webiste</p> : <p></p>}
                   <a className="text-sm text-[#e0e0e0] underline cursor-pointer mb-3" href={lead.website} target="_blank">{lead.website}</a>
-                  {lead.email? <p className="text-[#522386] text-sm">Email</p> : <p></p>}
+                  {lead.email? <p className="text-[#CBC3E3] text-sm">Email</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.email}</p>
-                  {lead.socialHandle? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Social Handle</p> : <p></p>}
+                  {lead.socialHandle? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Social Handle</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.socialHandle}</p>
-                  {lead.industry? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Industry</p> : <p></p>}
+                  {lead.industry? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Industry</p> : <p></p>}
                   <p className="text-sm text-[#e0e0e0] mb-3">{lead.industry}</p>
-                  {lead.note? <p className="text-[#522386] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Why they need you</p> : <p></p>}
+                  {lead.note? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-full">Why they need you</p> : <p></p>}
                   <p className="lg:text-sm text-[#e0e0e0]">{lead.note}</p>
                   </div>
                 </div>

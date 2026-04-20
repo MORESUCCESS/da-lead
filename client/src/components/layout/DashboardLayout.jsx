@@ -43,7 +43,7 @@ export default function DashboardLayout({ children }) {
           <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow">
             <Target size={16} className="text-white" strokeWidth={2.5} />
           </div>
-          <span className="font-bold text-xl text-[#E0E0E0]">Da-<span className='text-accent'>Lead</span></span>
+          <span className="font-bold text-xl text-[#E0E0E0]">Da-<span className='text-[#CBC3E3]'>Lead</span></span>
         </div>
 
         {/* Nav */}
@@ -102,7 +102,7 @@ export default function DashboardLayout({ children }) {
             <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Target size={14} className="text-white" />
             </div>
-            <span className="font-bold text-lg text-[#e0e0e0]">Da-<span className='text-accent'>Lead</span></span>
+            <span className="font-bold text-lg text-[#e0e0e0]">Da-<span className='text-[#CBC3E3]'>Lead</span></span>
           </div>
         </header>
 
