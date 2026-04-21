@@ -61,7 +61,6 @@ Ensure the output is parseable JSON.
 };
 
 
-
 const generateLeadsForUser = async (user) => {
   const today = new Date().toDateString();
 
@@ -69,115 +68,46 @@ const generateLeadsForUser = async (user) => {
     return user.dailyLeads;
   }
 
-  let lat, lon;
-
-  if (user.cachedLat && user.cachedLon) {
-    lat = user.cachedLat;
-    lon = user.cachedLon;
-  } else {
-    const geoRes = await axios.get(
-      "https://nominatim.openstreetmap.org/search",
-      {
-        params: { q: user.location, format: "json", limit: 1 },
-        headers: { "User-Agent": "da-lead-app/1.0 (ms2dwrld@gmail.com)" },
-        timeout: 8000,
-      },
-    );
-
-    if (!geoRes.data.length) throw new Error("Location not found");
-
-    lat = geoRes.data[0].lat;
-    lon = geoRes.data[0].lon;
-    user.cachedLat = lat;
-    user.cachedLon = lon;
-  }
-
-  console.log(`Coordinates for ${user.location}: lat=${lat}, lon=${lon}`);
-
-  // Use Nominatim to search for businesses directly — more reliable than Overpass
-  let rawBusinesses = [];
-
-  const searchTerms = ['shop', 'restaurant', 'office', 'hotel', 'cafe', 'clinic', 'pharmacy', 'gym', 'salon', 'supermarket'];
-
-  for (const term of searchTerms) {
-    if (rawBusinesses.length >= 30) break;
-    try {
-      const searchRes = await axios.get(
-        "https://nominatim.openstreetmap.org/search",
-        {
-          params: {
-            q: `${term} ${user.location}`,
-            format: "json",
-            limit: 10,
-            addressdetails: 1,
-          },
-          headers: { "User-Agent": "da-lead-app/1.0 (ms2dwrld@gmail.com)" },
-          timeout: 8000,
-        }
-      );
-
-      const results = searchRes.data.filter(r =>
-        r.display_name &&
-        !rawBusinesses.find(b => b.display_name === r.display_name)
-      );
-
-      rawBusinesses = [...rawBusinesses, ...results];
-    } catch {
-      continue;
-    }
-  }
-
-  console.log(`Nominatim returned ${rawBusinesses.length} results for ${user.location}`);
-
-  if (!rawBusinesses.length) throw new Error("No businesses found in your area.");
-
-  // Shuffle and filter seen
   const seenLeads = user.seenLeads || [];
+  const seenList = seenLeads.length > 0
+    ? `Do NOT include any of these businesses: ${seenLeads.slice(-15).join(', ')}`
+    : '';
 
-  const shuffled = rawBusinesses.sort(() => Math.random() - 0.5);
-
-  let freshBusinesses = shuffled
-    .filter(b => !seenLeads.includes(b.display_name))
-    .slice(0, 5);
-
-  if (freshBusinesses.length < 5) {
-    user.seenLeads = [];
-    const currentNames = freshBusinesses.map(b => b.display_name);
-    const fillUp = shuffled
-      .filter(b => !currentNames.includes(b.display_name))
-      .slice(0, 5 - freshBusinesses.length);
-    freshBusinesses = [...freshBusinesses, ...fillUp];
-  }
-
-  const businesses = freshBusinesses.slice(0, 5);
-
-  // Build business list for AI
-  const businessList = businesses.map((b, i) => {
-    const name = b.display_name.split(',')[0]; // first part is usually business name
-    const address = b.display_name;
-    const lat2 = b.lat;
-    const lon2 = b.lon;
-
-    return `${i + 1}. ${name} — address: ${address} — lat: ${lat2}, lon: ${lon2}`;
-  }).join("\n");
-
-  const aiRes = await openai.chat.completions.create({
-    model: "openai/gpt-3.5-turbo",
+  // Step 1 — Ask AI to find real businesses with web search enabled
+  const searchRes = await openai.chat.completions.create({
+    model: "perplexity/sonar", // ← supports real web search on OpenRouter
     messages: [
       {
-        role: "system",
-        content: `You are a lead generation assistant for freelancers. Given real local businesses in ${user.location}, generate a short personalized outreach note for each one tailored to a ${user.freelanceCategory}. Return ONLY a valid JSON array with no extra text: [{ "title": "business name", "address": "full address", "website": "empty string", "email": "empty string", "socialHandle": "empty string", "industry": "business category based on the name", "note": "any note about this lead, their social media activity, recent posts, pain points you noticed!" }]`,
-      },
-      {
         role: "user",
-        content: `Here are exactly ${businesses.length} real local businesses in ${user.location}:\n${businessList}\n\nGenerate outreach notes for each one. Return ONLY the JSON array with exactly ${businesses.length} items.`,
+        content: `Find 3 real local businesses in ${user.location} that would benefit from hiring a ${user.freelanceCategory}. 
+
+For each business find their REAL confirmed information only:
+- Business name
+- Physical address in ${user.location}
+- Website URL (only if confirmed real)
+- Contact email (only if confirmed real)
+- Instagram or social media handle (only if confirmed real)
+- Their specific industry
+
+${seenList}
+
+Return ONLY a valid JSON array with no extra text:
+[{ 
+  "title": "exact business name",
+  "address": "real address or empty string",
+  "website": "real website url or empty string",
+  "email": "real email or empty string", 
+  "socialHandle": "real handle or empty string",
+  "industry": "specific industry",
+  "note": "2-3 sentences on why they need a ${user.freelanceCategory} and what pain point you solve"
+}]`,
       },
     ],
     max_tokens: 1500,
-    temperature: 0.7,
+    temperature: 0.3, // low temp for factual accuracy
   });
 
-  const raw = aiRes.choices[0].message.content;
+  const raw = searchRes.choices[0].message.content;
   const clean = raw.replace(/```json|```/g, "").trim();
 
   let leads;
@@ -189,8 +119,9 @@ const generateLeadsForUser = async (user) => {
     else throw new Error("AI response could not be parsed");
   }
 
-  // Update seenLeads using display_name
-  const newSeenLeads = [...(user.seenLeads || []), ...businesses.map(b => b.display_name)];
+  leads = leads.slice(0, 3);
+
+  const newSeenLeads = [...(user.seenLeads || []), ...leads.map(l => l.title)];
   user.seenLeads = newSeenLeads.length > 100 ? newSeenLeads.slice(-100) : newSeenLeads;
   user.dailyLeads = leads;
   user.lastGeneratedDate = today;
@@ -199,7 +130,7 @@ const generateLeadsForUser = async (user) => {
   return leads;
 };
 
-// HTTP handler — thin wrapper
+// HTTP handler
 const autoLeadGen = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id);
@@ -229,5 +160,6 @@ const autoLeadGen = async (req, res) => {
     });
   }
 };
+
 
 module.exports = { generateSuggestedLeads, autoLeadGen, generateLeadsForUser };

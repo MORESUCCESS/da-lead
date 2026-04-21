@@ -213,7 +213,7 @@ export default function Settings() {
                   value={form.bio}
                   onChange={(e) => setForm({ ...form, bio: e.target.value })}
                   rows={4}
-                  placeholder="I am a specialized web developer focusing on React and conversion optimization..."
+                  placeholder="e.g I am a specialized web developer focusing on React and conversion optimization..."
                   className="input-field resize-none border-gray-800 bg-[#121212] text-[#e0e0e0] text-sm"
                 />
               </div>
