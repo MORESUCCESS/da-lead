@@ -94,10 +94,10 @@ ${seenList}
 Return ONLY a valid JSON array with no extra text:
 [{ 
   "title": "exact business name",
-  "address": "real address for the business if available or empty string",
-  "website": "real website for the business if available url or empty string",
-  "email": "real email for the business if available or empty string", 
-  "socialHandle": "real handle such as instagram, X, facebook tiktok, if available or empty string",
+  "address": "real address or empty string",
+  "website": "real website url or empty string",
+  "email": "real email or empty string", 
+  "socialHandle": "real handle or empty string",
   "industry": "specific industry",
   "note": "2-3 sentences on why they need a ${user.freelanceCategory} and what pain point you solve"
 }]`,
