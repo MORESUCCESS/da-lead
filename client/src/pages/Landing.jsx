@@ -160,7 +160,7 @@ export default function Landing() {
       <main className="flex-1">
         {/* Hero */}
         <section className="min-h-screen relative pt-20 pb-28 overflow-hidden bg-[#0000] items-center justify-center text-center">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" />
+          {/* <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" /> */}
           <div className="absolute bottom-20 left-0 w-64 h-64 bg-primary/10 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative lg:py-12 py-[85px]">
