@@ -113,7 +113,7 @@ export default function Landing() {
             </Link>
 
             {/* amburger menu icon */}
-            <div className="text-accent lg:hidden block">
+            <div className="text-[#8c63d2] lg:hidden block">
               <Hamburger
                 size={25}
                 toggled={isOpen}
