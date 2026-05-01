@@ -62,7 +62,7 @@ export default function Signup() {
         <ul className="space-y-3">
           {perks.map((p) => (
             <li key={p} className="flex items-center gap-3 text-primary-100">
-              <CheckCircle size={18} className="text-green-400 shrink-0" />
+              <CheckCircle size={18} className="text-white shrink-0" />
               {p}
             </li>
           ))}
