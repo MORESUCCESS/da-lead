@@ -59,7 +59,7 @@ const features = [
     icon: MessageSquare,
     title: "AI Pitch Generator",
     desc: "Stop writing the same message. Get personalized cold pitches, follow-ups, and closing messages in seconds.",
-    color: "from-primary to-accent",
+    color: "from-[#8c63d2] to-[#8c63d2]",
   },
   {
     icon: TrendingUp,
@@ -79,10 +79,10 @@ export default function Landing() {
       <header className="sticky top-0 z-50 bg-[#121212]/60 backdrop-blur-sm border-b border-gray-900">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm">
-              <Target size={16} className="text-white" strokeWidth={2.5} />
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#8c63d2] to-[#8c63d2] flex items-center justify-center shadow-sm">
+              <Target size={16} className="text-white" strokeWidth={2.8} />
             </div>
-            <span className="font-bold lg:text-xl text-gray-200">Da-<span className="text-accent">Lead</span></span>
+            <span className="font-bold lg:text-xl text-gray-200">Da-<span className="text-[#8c63d2]">Lead</span></span>
           </div>
           <div className="lg:flex hidden md:gap-6">
             <a
@@ -166,16 +166,16 @@ export default function Landing() {
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative lg:py-12 py-[85px]">
             <div className="flex items-center w-full justify-center">
               <div>
-                <div data-aos="fade-up" className="inline-flex items-center gap-2 bg-accent/10 text-accent text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+                <div data-aos="fade-up" className="inline-flex items-center gap-2 bg-[#522398]/10 text-white/80 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
                   <Zap size={14} />
                   <span>AI-Powered Lead Outreach</span>
                 </div>
                 <h1 data-aos="fade-right" className="lg:text-5xl text-4xl font-black text-[#E0E0E0] leading-tight mb-6">
                   Find leads, send {" "}
                   <br className="lg:flex hidden" />
-                  smarter ptiches,{" "}
-                  <span className="text-[#522398]">and close</span>{" "}
-                  <span className="text-accent">deals.</span>
+                  <span className="text-[#6d3bb5]">smarter ptiches,</span>{" "}
+                  <span>and close</span>{" "}
+                  <span className="">deals.</span>
                 </h1>
                 <p data-aos="fade-in" className="lg:text-lg text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto">
                   The all-in-one platform for freelancers and online hustlers to
@@ -210,7 +210,7 @@ export default function Landing() {
                   data-aos="fade-right"
                   className="flex items-start gap-5 bg-[#1E1E1E] rounded-2xl p-5 text-left border border-white/10 hover:scale-105 duration-300 cursor-pointer"
                 >
-                  <XCircle size={20} className="text-accent shrink-0 mt-0.5" />
+                  <XCircle size={20} className="text-[#8c63d2] shrink-0 mt-0.5" />
                   <p className="text-gray-300 font-medium">{point}</p>
                 </div>
               ))}
@@ -330,10 +330,10 @@ export default function Landing() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-col lg:flex-row items-center gap-2">
-              <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+              <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#8c63d2] to-[#8c63d2] flex items-center justify-center">
                 <Target size={14} className="text-white" />
               </div>
-              <span className="font-bold text-[#E0E0E0]">Da-Lead</span>
+              <p className="text-white font-bold">Da-<span className="text-[#8c63d2]">Lead</span></p>
               <span className="text-[#A0A0A0] text-sm ml-2">
                 · Find leads, send smarter ptiches, and close deals.
               </span>
