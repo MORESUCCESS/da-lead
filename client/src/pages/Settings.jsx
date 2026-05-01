@@ -166,7 +166,7 @@ export default function Settings() {
                     type="email"
                     value={profile?.email || ""}
                     disabled
-                    className="input-field border-gray-800 bg-[#121212] text-[#6A6A6A] cursor-not-allowed text-sm"
+                    className="input-field border-gray-800 bg-[#121212] text-gray-400 cursor-not-allowed text-sm"
                   />
                 </div>
               </div>

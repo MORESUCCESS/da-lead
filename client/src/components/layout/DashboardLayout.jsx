@@ -24,7 +24,15 @@ export default function DashboardLayout({ children }) {
     : 'U';
 
   return (
-    <div className="min-h-screen flex bg-[#121212]">
+    <div className="min-h-screen flex bg-[#000] lg:ml-64"
+      style={{
+        backgroundImage: `
+      linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
+    `,
+        backgroundSize: "40px 40px",
+      }}
+    >
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
@@ -35,15 +43,15 @@ export default function DashboardLayout({ children }) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-[#121212] border-r border-gray-800 flex flex-col z-30 transition-transform duration-400
-          ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:static lg:z-auto`}
+        className={`fixed top-0 left-0 h-screen w-64 bg-[#121212] border-r border-gray-800 flex flex-col z-30 transition-transform duration-400
+          ${mobileOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 lg:z-auto`}
       >
         {/* Logo */}
         <div className="h-16 flex items-center gap-2.5 px-6 border-b border-gray-800">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#8c63d2] to-[#8c63d2] flex items-center justify-center shadow">
             <Target size={16} className="text-white" strokeWidth={2.5} />
           </div>
-          <span className="font-bold text-xl text-[#E0E0E0]">Da-<span className='text-[#CBC3E3]'>Lead</span></span>
+          <span className="font-bold text-[#E0E0E0]">Da-<span className='text-[#8c63d2]'>Lead</span></span>
         </div>
 
         {/* Nav */}
@@ -74,7 +82,7 @@ export default function DashboardLayout({ children }) {
               {initials}
             </div>
             <div className="min-w-0">
-              <p className="text-sm font-semibold text-[#522398] truncate">{user?.name}</p>
+              <p className="text-sm font-semibold text-[#8c63d2] truncate">{user?.name}</p>
               <p className="text-xs text-[#A0A0A0] truncate">{user?.email}</p>
             </div>
           </div>
@@ -99,10 +107,10 @@ export default function DashboardLayout({ children }) {
             <Menu size={22} className='text-[#a0a0a0]'/>
           </button>
           <div className="flex items-center gap-2 ml-3">
-            <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+            <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#8c63d2] to-[#8c63d2] flex items-center justify-center">
               <Target size={14} className="text-white" />
             </div>
-            <span className="font-bold text-lg text-[#e0e0e0]">Da-<span className='text-[#CBC3E3]'>Lead</span></span>
+            <span className="font-bold text-[#e0e0e0]">Da-<span className='text-[#8c63d2]'>Lead</span></span>
           </div>
         </header>
 

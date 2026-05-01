@@ -65,7 +65,7 @@ export default function LeadAnalysis() {
       <div className="max-w-2xl">
         {!analysis ? (
           <div className="card p-10 text-center bg-[#1e1e1e] border-gray-800">
-            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#8c63d2] to-[#8c63d2] flex items-center justify-center mx-auto mb-6 shadow-lg">
               <Zap size={36} className="text-white" />
             </div>
             <h2 className="text-xl font-black text-[#e0e0e0] mb-2">AI Opportunity Analysis</h2>

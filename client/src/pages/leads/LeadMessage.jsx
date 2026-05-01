@@ -64,7 +64,7 @@ export default function LeadMessage() {
   return (
     <DashboardLayout>
       <div className="mb-8">
-        <Link to={`/leads/${id}`} className="inline-flex items-center gap-1.5 text-sm text-[#e0e0e0] hover:text-gray-900 font-medium mb-4">
+        <Link to={`/leads/${id}`} className="inline-flex items-center gap-1.5 text-sm text-[#e0e0e0] hover:text-gray-400 font-medium mb-4">
           <ArrowLeft size={15} /> Back to {lead?.businessName || 'Lead'}
         </Link>
         <h1 className="text-2xl font-black text-[#e0e0e0]">AI Message Generator</h1>
@@ -84,7 +84,7 @@ export default function LeadMessage() {
         <div className="lg:col-span-2 space-y-5">
           <div className="card p-6 bg-[#1e1e1e] border-gray-800">
             <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#8c63d2] to-[#8c63d2] flex items-center justify-center">
                 <Zap size={16} className="text-white" />
               </div>
               <h2 className="font-bold text-[#e0e0e0]">AI Writer</h2>
