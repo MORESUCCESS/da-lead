@@ -34,10 +34,10 @@ export default function Login() {
       <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-12 bg-[#121212]">
         <div className="max-w-md w-full mx-auto">
           <Link to="/" className="flex items-center gap-2 mb-10">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#522398] to-accent flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#522398] to-[#8c63d2] flex items-center justify-center">
               <Target size={16} className="text-white" />
             </div>
-            <span className="font-bold text-xl text-[#e0e0e0]">Da-Lead</span>
+            <p className='text-white font-bold'>Da-<span className="font-bold text-[#8c63d2]">Lead</span></p>
           </Link>
 
           <h1 className="text-3xl font-black text-[#e0e0e0] mb-2">Welcome back</h1>
