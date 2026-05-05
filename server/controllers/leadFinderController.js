@@ -102,9 +102,9 @@ Return ONLY this exact JSON format, no markdown, no explanation:
   {
     "title": "exact real business name",
     "address": "full street address in ${user.location}",
-    "website": "https://realwebsite.com or empty string",
-    "email": "real@email.com or empty string",
-    "socialHandle": "@realhandle or empty string",
+    "website": "https://realwebsite.com or empty string if not available",
+    "email": "real@email.com or empty string if not available",
+    "socialHandle": "@realhandle or empty string if not available",
     "industry": "specific industry e.g. Fashion Retail, Food & Beverage, Healthcare",
     "note": "2-3 sentences on the specific digital problem this business has and exactly how a ${user.freelanceCategory} solves it"
   }
