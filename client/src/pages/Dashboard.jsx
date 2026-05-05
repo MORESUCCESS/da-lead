@@ -38,29 +38,47 @@ export default function Dashboard() {
   const [profileIncomplete, SetProfileIncomplete] = useState(false);
   const [leadError, setLeadError] = useState("");
 
-useEffect(() => {
-  // Load stats and leads immediately
-  Promise.all([
-    api.get("/dashboard/stats"),
-    api.get("/leads"),
-  ]).then(([statsRes, leadsRes]) => {
-    setStats(statsRes.data);
-    setLeads(leadsRes.data.slice(0, 5));
-  }).finally(() => setLoading(false));
+  useEffect(() => {
+    // Load stats and leads immediately
+    Promise.all([api.get("/dashboard/stats"), api.get("/leads")])
+      .then(([statsRes, leadsRes]) => {
+        setStats(statsRes.data);
+        setLeads(leadsRes.data.slice(0, 5));
+      })
+      .finally(() => setLoading(false));
 
-  // Load daily leads separately 
-  api.get("/lead-finder/daily")
-    .then((dailyRes) => {
-      if (dailyRes.data.incomplete) {
-        SetProfileIncomplete(true);
-      } else if (dailyRes.data.success) {
-        setDailyLeads(dailyRes.data.leads);
-      } else {
-        setLeadError(dailyRes.data.message || "Could not load leads.");
-      }
-    })
-    .finally(() => setLeadsLoading(false));
-}, []);
+    // Load daily leads separately
+    api
+      .get("/lead-finder/daily")
+      .then((dailyRes) => {
+        if (dailyRes.data.incomplete) {
+          SetProfileIncomplete(true);
+        } else if (dailyRes.data.generating) {
+          // Leads are being generated in background — poll every 10 seconds
+          setLeadError("Generating your leads... this may take a moment.");
+          const interval = setInterval(async () => {
+            try {
+              const pollRes = await api.get("/lead-finder/daily");
+              if (pollRes.data.success && pollRes.data.leads?.length > 0) {
+                setDailyLeads(pollRes.data.leads);
+                setLeadError("");
+                clearInterval(interval);
+              }
+            } catch {
+              clearInterval(interval);
+            }
+          }, 10000); // poll every 10 seconds
+
+          // Stop polling after 2 minutes
+          setTimeout(() => clearInterval(interval), 120000);
+        } else if (dailyRes.data.success && dailyRes.data.leads?.length > 0) {
+          setDailyLeads(dailyRes.data.leads);
+        } else {
+          setLeadError(dailyRes.data.message || "Could not load leads.");
+        }
+      })
+      .finally(() => setLeadsLoading(false));
+  }, []);
 
   // Dashboard cards
   const statCards = [
@@ -143,7 +161,7 @@ useEffect(() => {
           to="/leads/add"
           className="btn-primary bg-[#522398] text-sm flex items-center gap-2"
         >
-          <Plus size={16}/> <p className="lg:flex hidden ">Add New Lead</p>
+          <Plus size={16} /> <p className="lg:flex hidden ">Add New Lead</p>
         </Link>
       </div>
 
@@ -216,20 +234,70 @@ useEffect(() => {
                 <div className="w-full p-3">
                   {/* <h1 className="text-[#e0e0e0] py-2 px-5 bg-[#1e1e1e] w-fit rounded-full font-bold">Lead {idx + 1}</h1> */}
                   <div className="space-y-2">
-                    <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">Business name</p>
-                    <p className="font-semibold text-[#e0e0e0] text-sm mb-2">{lead.title}</p>
-                  {lead.address? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">Address</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0] mb-3">{lead.address}</p>
-                  {lead.website? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">Webiste</p> : <p></p>}
-                  <a className="text-sm text-[#e0e0e0] underline cursor-pointer mb-3" href={lead.website} target="_blank">{lead.website}</a>
-                  {lead.email? <p className="text-[#CBC3E3] text-sm">Email</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0] mb-3">{lead.email}</p>
-                  {lead.socialHandle? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">Social Handle</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0] mb-3">{lead.socialHandle}</p>
-                  {lead.industry? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">Industry</p> : <p></p>}
-                  <p className="text-sm text-[#e0e0e0] mb-3">{lead.industry}</p>
-                  {lead.note? <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">Why they need you</p> : <p></p>}
-                  <p className="lg:text-sm text-[#e0e0e0]">{lead.note}</p>
+                    <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">
+                      Business name
+                    </p>
+                    <p className="font-semibold text-[#e0e0e0] text-sm mb-2">
+                      {lead.title}
+                    </p>
+                    {lead.address ? (
+                      <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">
+                        Address
+                      </p>
+                    ) : (
+                      <p></p>
+                    )}
+                    <p className="text-sm text-[#e0e0e0] mb-3">
+                      {lead.address}
+                    </p>
+                    {lead.website ? (
+                      <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">
+                        Webiste
+                      </p>
+                    ) : (
+                      <p></p>
+                    )}
+                    <a
+                      className="text-sm text-[#e0e0e0] underline cursor-pointer mb-3"
+                      href={lead.website}
+                      target="_blank"
+                    >
+                      {lead.website}
+                    </a>
+                    {lead.email ? (
+                      <p className="text-[#CBC3E3] text-sm">Email</p>
+                    ) : (
+                      <p></p>
+                    )}
+                    <p className="text-sm text-[#e0e0e0] mb-3">{lead.email}</p>
+                    {lead.socialHandle ? (
+                      <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">
+                        Social Handle
+                      </p>
+                    ) : (
+                      <p></p>
+                    )}
+                    <p className="text-sm text-[#e0e0e0] mb-3">
+                      {lead.socialHandle}
+                    </p>
+                    {lead.industry ? (
+                      <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">
+                        Industry
+                      </p>
+                    ) : (
+                      <p></p>
+                    )}
+                    <p className="text-sm text-[#e0e0e0] mb-3">
+                      {lead.industry}
+                    </p>
+                    {lead.note ? (
+                      <p className="text-[#CBC3E3] text-sm bg-[#1e1e1e] w-fit py-2 px-5 rounded-lg">
+                        Why they need you
+                      </p>
+                    ) : (
+                      <p></p>
+                    )}
+                    <p className="lg:text-sm text-[#e0e0e0]">{lead.note}</p>
                   </div>
                 </div>
                 <button
@@ -247,7 +315,7 @@ useEffect(() => {
                   }
                   className="btn-primary text-sm  bg-[#522398] px-5 py-2 rounded-xl lg:w-fit w-full flex gap-3 items-center justify-center"
                 >
-                  Add lead <ArrowRight size={15}/>
+                  Add lead <ArrowRight size={15} />
                 </button>
               </li>
             ))}
@@ -315,8 +383,8 @@ useEffect(() => {
                             : lead.opportunityScore === "medium"
                               ? "badge-medium"
                               : lead.opportunityScore === "low"
-                               ?  "badge-low"
-                               : "Analyze"
+                                ? "badge-low"
+                                : "Analyze"
                         }
                       >
                         {lead.opportunityScore}

@@ -70,41 +70,49 @@ const generateLeadsForUser = async (user) => {
 
   const seenLeads = user.seenLeads || [];
   const seenList = seenLeads.length > 0
-    ? `Do NOT include any of these businesses: ${seenLeads.slice(-15).join(', ')}`
+    ? `Do NOT include any of these businesses already shown: ${seenLeads.slice(-15).join(', ')}.`
     : '';
 
-  // Step 1 — Ask AI to find real businesses with web search enabled
   const searchRes = await openai.chat.completions.create({
-    model: "perplexity/sonar", // ← supports real web search on OpenRouter
+    model: "perplexity/sonar",
     messages: [
       {
         role: "user",
-        content: `Find 3 real local businesses in ${user.location} that would benefit from hiring a ${user.freelanceCategory}. 
+        content: `Search the web and find exactly 3 real local businesses in ${user.location} that would benefit from hiring a ${user.freelanceCategory}.
 
-For each business find their REAL confirmed information only:
-- Business name
-- Physical address in ${user.location}
-- Website URL (only if confirmed real)
-- Contact email (only if confirmed real)
-- Instagram or social media handle (only if confirmed real)
-- Their specific industry
+For each business, search thoroughly for:
+1. Their exact business name
+2. Their full physical street address in ${user.location} — this is required, search hard for it
+3. Their website URL — search their name to find it
+4. Their contact email — check their website contact page
+5. Their Instagram or Facebook handle — search "@businessname" on social media
+6. Their specific business industry
 
 ${seenList}
 
-Return ONLY a valid JSON array with no extra text:
-[{ 
-  "title": "exact business name",
-  "address": "real address or empty string",
-  "website": "real website url or empty string",
-  "email": "real email or empty string", 
-  "socialHandle": "real handle or empty string",
-  "industry": "specific industry",
-  "note": "2-3 sentences on why they need a ${user.freelanceCategory} and what pain point you solve"
-}]`,
+Rules:
+- Only return information you have confirmed from real web search results
+- For address: always provide the full street address if found, never leave empty if you can find it
+- For website, email, socialHandle: return empty string "" only if you truly cannot find it after searching
+- Never guess or fabricate any information
+- Return businesses that are currently active and operating
+
+Return ONLY this exact JSON format, no markdown, no explanation:
+[
+  {
+    "title": "exact real business name",
+    "address": "full street address in ${user.location}",
+    "website": "https://realwebsite.com or empty string",
+    "email": "real@email.com or empty string",
+    "socialHandle": "@realhandle or empty string",
+    "industry": "specific industry e.g. Fashion Retail, Food & Beverage, Healthcare",
+    "note": "2-3 sentences on the specific digital problem this business has and exactly how a ${user.freelanceCategory} solves it"
+  }
+]`,
       },
     ],
     max_tokens: 1500,
-    temperature: 0.3, // low temp for factual accuracy
+    temperature: 0.2,
   });
 
   const raw = searchRes.choices[0].message.content;
@@ -130,7 +138,6 @@ Return ONLY a valid JSON array with no extra text:
   return leads;
 };
 
-// HTTP handler
 const autoLeadGen = async (req, res) => {
   try {
     const user = await userModel.findById(req.user.id);
@@ -149,8 +156,13 @@ const autoLeadGen = async (req, res) => {
       return res.json({ success: true, leads: user.dailyLeads });
     }
 
-    const leads = await generateLeadsForUser(user);
-    return res.json({ success: true, leads });
+    // Respond immediately with generating status, run generation in background
+    res.json({ success: true, leads: [], generating: true });
+
+    // Generate in background — don't await in response
+    generateLeadsForUser(user).catch(err => {
+      console.error("Background lead gen failed:", err.message);
+    });
 
   } catch (error) {
     console.error("autoLeadGen error:", error.message);

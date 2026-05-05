@@ -1,7 +1,8 @@
 const userModel = require('../models/userModel.js');
+const { generateLeadsForUser } = require('./leadFinderController.js'); 
 
-const conFunction = async (req, res)=>{
-    const secret = req.headers['x-cron-secret'];
+const conFunction = async (req, res) => {
+  const secret = req.headers['x-cron-secret'];
   if (secret !== process.env.CRON_SECRET) {
     return res.status(401).json({ success: false, message: 'Unauthorized' });
   }
@@ -29,7 +30,6 @@ const conFunction = async (req, res)=>{
     console.error('Cron error:', err.message);
     return res.status(500).json({ success: false, message: err.message });
   }
-}
-
+};
 
 module.exports = conFunction;
