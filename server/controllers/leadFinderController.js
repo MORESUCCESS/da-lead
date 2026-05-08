@@ -174,4 +174,4 @@ const autoLeadGen = async (req, res) => {
 };
 
 
-module.exports = { generateSuggestedLeads, autoLeadGen, generateLeadsForUser };
+module.exports = { autoLeadGen, generateLeadsForUser };
