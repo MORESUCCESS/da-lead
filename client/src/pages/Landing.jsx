@@ -178,7 +178,7 @@ export default function Landing() {
         {/* Hero */}
         <section className="min-h-screen relative pt-20 pb-28 overflow-hidden bg-[#0000] items-center justify-center text-center">
           {/* <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl" /> */}
-          <div className="absolute bottom-[60%] lg:right-[35%] right-[0] w-64 h-64 bg-primary/50 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
+          <div className="absolute bottom-[60%] lg:right-[35%] right-[-0%] w-64 h-64 bg-primary/40 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
 
           <div className="max-w-6xl mx-auto px-4 sm:px-6 relative lg:py-12 py-[85px]">
             <div className="flex items-center w-full justify-center">
@@ -222,7 +222,7 @@ export default function Landing() {
 
         {/* Pain Points */}
         <section className="relative overflow-hidden py-20 bg-[#121212]">
-          <div className="absolute top-[-40%] left-[45%] w-64 h-64 bg-primary/10 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
+          <div className="absolute top-[-20%] left-[45%] w-64 h-64 bg-primary/30 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
             <h2
               data-aos="fade-up"
@@ -257,7 +257,7 @@ export default function Landing() {
           id="howitworks"
           className="relative py-24 bg-gradient-to-br bg-[#1E1E1E]"
         >
-          <div className="absolute top-[-20%] left-[45%] w-64 h-64 bg-primary/20 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
+          <div className="absolute top-[-10%] left-[45%] w-64 h-64 bg-primary/30 rounded-full translate-y-1/2 -translate-x-1/3 blur-3xl" />
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div data-aos="fade-up" className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-black text-[#E0E0E0] mb-4">
@@ -314,7 +314,7 @@ export default function Landing() {
             backgroundSize: "40px 40px",
           }}
         >
-          <div className="absolute top-[-30%] left-[45%] w-64 h-64 bg-primary/25 translate-y-1/2 -translate-x-1/3 blur-3xl" />
+          <div className="absolute top-[-10%] left-[45%] w-64 h-64 bg-primary/35 translate-y-1/2 -translate-x-1/3 blur-3xl" />
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div data-aos="fade-right" className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-black text-[#E0E0E0] mb-4">
