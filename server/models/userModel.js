@@ -35,6 +35,8 @@ const userSchema = new mongoose.Schema(
 
     cachedLat: { type: String, default: "" },
     cachedLon: { type: String, default: "" },
+    
+    isGenerating: { type: Boolean, default: false },
   },
   { timestamps: true },
 );

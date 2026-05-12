@@ -10,6 +10,7 @@ import {
   Search,
   Clock,
   Mail,
+  Twitter,
 } from "lucide-react";
 import Hamburger from "hamburger-react";
 import { useState } from "react";
@@ -382,30 +383,46 @@ export default function Landing() {
       {/* Footer */}
       <footer className="bg-[#121212] py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex flex-col lg:flex-row items-center gap-2">
-              <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#8c63d2] to-[#8c63d2] flex items-center justify-center">
-                <Target size={14} className="text-white" />
+          <div className="flex flex-col md:flex-row items-start justify-between gap-6">
+            <div className="flex flex-col items-start gap-3">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-[#8c63d2] to-[#8c63d2] flex items-center justify-center">
+                  <Target size={14} className="text-white" />
+                </div>
+                <p className="text-white font-bold">
+                  Da-<span className="text-[#8c63d2]">Lead</span>
+                </p>
               </div>
-              <p className="text-white font-bold">
-                Da-<span className="text-[#8c63d2]">Lead</span>
-              </p>
               <span className="text-[#A0A0A0] text-sm ml-2">
-                · Find leads, send smarter ptiches, and close deals.
+                Find leads, send smarter ptiches, and close deals.
               </span>
             </div>
-            <div className="flex gap-6 text-sm text-[#A0A0A0]">
-              <a href="#" className="hover:text-gray-300 transition-colors">
-                Privacy
-              </a>
-              <a href="#" className="hover:text-gray-300 transition-colors">
-                Terms
-              </a>
-              <a href="#" className="hover:text-gray-300 transition-colors">
-                Contact
-              </a>
+            <div className="text-sm text-[#A0A0A0] space-y-3">
+              <h1 className="text-white font-bold">Quick Links</h1>
+              <div className="flex flex-col gap-3">
+                <a href="#" className="hover:text-gray-300 transition-colors">
+                  Home
+                </a>
+                <a href="#howitworks" className="hover:text-gray-300 transition-colors">
+                  How it works
+                </a>
+                <a href="#features" className="hover:text-gray-300 transition-colors">
+                  Features
+                </a>
+              </div>
             </div>
-            <p className="text-[#A0A0A0] text-sm">
+            <div className="text-sm text-[#A0A0A0] space-y-3">
+              <h1 className="text-white font-bold">Connect with us</h1>
+              <div className="flex flex-col gap-3">
+                <a href="https://x.com/@_DaLead" target="_blank" className="hover:text-gray-300 transition-colors">
+                  <Twitter/>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full flex items-center justify-center mt-10 border-t-2 border-t-white/20">
+            <p className="text-[#A0A0A0] text-sm pt-4">
               © 2026 Da-Lead. All rights reserved.
             </p>
           </div>

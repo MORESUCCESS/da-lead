@@ -6,7 +6,6 @@ const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
 });
 
-
 const generateLeadsForUser = async (user) => {
   const today = new Date().toDateString();
 
@@ -15,12 +14,13 @@ const generateLeadsForUser = async (user) => {
   }
 
   const seenLeads = user.seenLeads || [];
-  const seenList = seenLeads.length > 0
-    ? `Do NOT include any of these businesses already shown: ${seenLeads.slice(-15).join(', ')}.`
-    : '';
+  const seenList =
+    seenLeads.length > 0
+      ? `Do NOT include any of these businesses already shown: ${seenLeads.slice(-15).join(", ")}.`
+      : "";
 
   const searchRes = await openai.chat.completions.create({
-    model: "perplexity/sonar",
+    model: "openai/gpt-4o-mini",
     messages: [
       {
         role: "user",
@@ -57,26 +57,39 @@ Return ONLY this exact JSON format, no markdown, no explanation:
 ]`,
       },
     ],
-    max_tokens: 1500,
+    max_tokens: 300,
     temperature: 0.2,
   });
 
   const raw = searchRes.choices[0].message.content;
-  const clean = raw.replace(/```json|```/g, "").trim();
-
   let leads;
+
   try {
+    const clean = raw
+      .replace(/```json|```/g, "")
+      .replace(/\n/g, "")
+      .trim();
+
     leads = JSON.parse(clean);
-  } catch {
-    const match = clean.match(/\[.*\]/s);
-    if (match) leads = JSON.parse(match[0]);
-    else throw new Error("AI response could not be parsed");
+  } catch (err) {
+    console.error("RAW AI RESPONSE:", raw);
+
+    const match = raw.match(/\[[\s\S]*\]/);
+    if (match) {
+      leads = JSON.parse(match[0]);
+    } else {
+      throw new Error("AI response could not be parsed");
+    }
   }
 
   leads = leads.slice(0, 3);
 
-  const newSeenLeads = [...(user.seenLeads || []), ...leads.map(l => l.title)];
-  user.seenLeads = newSeenLeads.length > 100 ? newSeenLeads.slice(-100) : newSeenLeads;
+  const newSeenLeads = [
+    ...(user.seenLeads || []),
+    ...leads.map((l) => l.title),
+  ];
+  user.seenLeads =
+    newSeenLeads.length > 100 ? newSeenLeads.slice(-100) : newSeenLeads;
   user.dailyLeads = leads;
   user.lastGeneratedDate = today;
   await user.save();
@@ -92,7 +105,7 @@ const autoLeadGen = async (req, res) => {
       return res.json({
         success: false,
         incomplete: true,
-        message: "Please update your profile with your freelance category and location.",
+        message: "Please update your profile.",
       });
     }
 
@@ -102,22 +115,30 @@ const autoLeadGen = async (req, res) => {
       return res.json({ success: true, leads: user.dailyLeads });
     }
 
-    // Respond immediately with generating status, run generation in background
+    // If already generating today (generating flag), don't trigger again
+    if (user.isGenerating) {
+      return res.json({ success: true, leads: [], generating: true });
+    }
+
+    // Set generating flag
+    await userModel.findByIdAndUpdate(user._id, { isGenerating: true });
+
     res.json({ success: true, leads: [], generating: true });
 
-    // Generate in background — don't await in response
-    generateLeadsForUser(user).catch(err => {
-      console.error("Background lead gen failed:", err.message);
-    });
-
+    generateLeadsForUser(user)
+      .catch((err) => console.error("Background lead gen failed:", err.message))
+      .finally(async () => {
+        await userModel.findByIdAndUpdate(user._id, { isGenerating: false });
+      });
   } catch (error) {
     console.error("autoLeadGen error:", error.message);
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to generate leads",
-    });
+    return res
+      .status(500)
+      .json({
+        success: false,
+        message: error.message || "Failed to generate leads",
+      });
   }
 };
-
 
 module.exports = { autoLeadGen, generateLeadsForUser };
